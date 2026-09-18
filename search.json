@@ -11,7 +11,14 @@
     "href": "dashboards/index.html",
     "title": "Dashboards",
     "section": "",
-    "text": "I built these to be used either in teaching or for fun as exercises in creating shiny dashboards. All of them run in the browser or on a free host; source is on GitHub.\n\n\nTeach Yourself SQL\nA browser-only Shiny app that teaches SQL to people who already know the basics of R that I built to teach myself SQL. Each tab builds one clause of a query on a live SQLite database then gives users a live editor to test their knowledge. Source\n\n\nSelf-guided Tour of T-Tests and ANOVA\nA ground-up visual explanation of common statistical procedures that uses interactive figures to (hopefully) demystify some of the more obtuse concepts. Source\n\n\nGlobal Data on Teacher Pay and Job Satisfaction\nAn interactive dashboard on teacher salaries and working hours (R, flexdashboard, plotly). Source\n\n\nLA28 Olympic Schedule Builder\nIn preparation for the LA28 Olympic Games, this little app creates custom schedules for different events based on user interest, budget, and location. First load may take a few seconds while the free host wakes up. Source"
+    "text": "I greatly enjoy building an interactive dashboard to explain complicated concepts or to let others explore data for themselves. To that end, below are a few of my favorites. Some are educational tools I used in teaching, the others are fun apps for exploring data. All run in the browser or on a free host."
+  },
+  {
+    "objectID": "dashboards/index.html#fun-with-data",
+    "href": "dashboards/index.html#fun-with-data",
+    "title": "Dashboards",
+    "section": "Fun with Data",
+    "text": "Fun with Data\n\n\nLA28 Olympic Schedule Builder\nIn preparation for the LA28 Olympic Games, this little app creates custom schedules for different events based on user interest, budget, and location. First load may take a few seconds while the free host wakes up. Source"
   },
   {
     "objectID": "projects/index.html",
@@ -25,7 +32,7 @@
     "href": "index.html",
     "title": "Zach Schroeder",
     "section": "",
-    "text": "Email  GitHub  LinkedIn  Scholar  Résumé\n\n\nI’m a behavioral scientist and statistician with seven years of experience researching interpersonal perception: how do we understand one another in person, online, and in the classroom? In doing so, my work has built analytic pipelines that transcribed and analyzed 20 years of video-recorded conversations to understand what the best cues are for understanding what someone is thinking, examined emotional and semantic drift in approximately 8 million Tweets discussing ‘cancel culture’ on social media, and used survey data to understand how students’ feelings of belonging impact how they interpret ambiguous academic feedback\nBased in Minneapolis, if I’m not wrangling data at my desk, I’m either getting lost in the woods with my dog, trying to bake as well as my grandfather, or working on the NYT crossword."
+    "text": "Email  GitHub  LinkedIn  Scholar  Résumé\n\n\nHow do we use language understand one another?\nI’m a behavioral scientist and statistician with seven years of experience researching this question. I’ve built an analytic pipeline that transcribed and analyzed 20 years of video-recorded conversations to examine what the best cues are for understanding what someone is thinking; I examined emotional and semantic drift in ~8 million Tweets discussing ‘cancel culture’ on social media; and I used survey data to understand how students’ feelings of belonging impact how they interpret ambiguous academic feedback\nIf I’m not wrangling data at my desk, I’m deep in the woods with my dog."
   },
   {
     "objectID": "index.html#featured-projects",
