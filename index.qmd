@@ -26,7 +26,7 @@ listing:
 ::: {.g-col-12 .g-col-md-8}
 **How do we use language understand one another?**
 
-I'm a behavioral scientist and statistician with seven years of experience researching this question. I've built an analytic pipeline that transcribed and analyzed 20 years of video-recorded conversations to examine what the best cues are for understanding what someone is thinking; I examined emotional and semantic drift in \~8 million Tweets discussing 'cancel culture' on social media; and I used survey data to understand how students' feelings of belonging impact how they interpret ambiguous academic feedback
+I'm a behavioral scientist and statistician with seven years of experience researching this question. In that time, I've built an analytic pipeline that transcribed and analyzed 20 years of video-recorded conversations to identify the best cues for understanding what someone is thinking; I examined emotional and semantic drift in \~8 million Tweets discussing 'cancel culture' on social media, building comprehensive timelines of how outrage builds and dissipates over time; and I used survey data to understand how students' feelings of belonging impact how they interpret ambiguous academic feedback
 
 If I'm not wrangling data at my desk, I'm deep in the woods with my dog.
 :::
