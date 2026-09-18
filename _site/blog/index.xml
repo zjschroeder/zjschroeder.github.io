@@ -10,49 +10,6 @@
 <atom:link href="https://zjschroeder.com/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description>Zach Schroeder, PhD. Data scientist and mixed-methods researcher: NLP on conversation and text at scale, Bayesian modeling, experiments.</description>
 <generator>quarto-1.10.18</generator>
-<lastBuildDate>Thu, 17 Sep 2026 05:00:00 GMT</lastBuildDate>
-<item>
-  <title>From a CV to a resume: what I cut, and why it hurt</title>
-  <link>https://zjschroeder.com/blog/posts/2026-09-17-cv-to-resume/</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>The academic CV I defended with ran to four pages. The resume I now send runs to one, and almost nothing on it is phrased the way the CV phrased it. This post is the record of that conversion, written mostly so I remember the rules next time.</p>
-<section id="the-cv-describes-what-i-studied.-the-resume-describes-what-i-built." class="level2">
-<h2 class="anchored" data-anchor-id="the-cv-describes-what-i-studied.-the-resume-describes-what-i-built.">The CV describes what I studied. The resume describes what I built.</h2>
-<p>The first bullet on my old CV said I “synthesized 20 years of video-recorded interviews into a novel dataset examining the linguistic predictors of empathy in interpersonal conversation.” Every word is true and none of it tells a hiring manager what I can do for them. The replacement says what happened, in order: six legacy studies consolidated, 74 hours transcribed with a speech model, a team of research assistants trained to correct it, a segmentation model fine-tuned on 5,000 hand-coded utterances at 96.8% holdout agreement. The topic (empathy) is gone. The mechanics are what transfer.</p>
-<p>The general rule I landed on, after reading more career-office guidance than I would like to admit: a resume bullet is a verb, a thing, a scale or tool, and a result. If it does not end with a number or a consequence, it is a responsibility, and nobody hires for responsibilities.</p>
-</section>
-<section id="titles-are-for-the-reader-not-the-registrar" class="level2">
-<h2 class="anchored" data-anchor-id="titles-are-for-the-reader-not-the-registrar">Titles are for the reader, not the registrar</h2>
-<p>“PhD Student, Graduate Research Fellow” is what the university called me. It is also nearly meaningless to someone who has never been inside a psychology department. The resume now says “Research Scientist and Statistics Instructor (Graduate Research Fellow),” with the official title in parentheses where a background check can find it. Same job, described for the person reading.</p>
-</section>
-<section id="publications-became-one-line" class="level2">
-<h2 class="anchored" data-anchor-id="publications-became-one-line">Publications became one line</h2>
-<p>Two peer-reviewed articles and eight conference presentations occupied a page of the CV. They are one line on the resume, with a Google Scholar link. Industry readers do not weigh a publication list; they weigh whether the work was used. So the feedback experiment became a bullet about preregistered replication standards, and the papers moved to the bottom.</p>
-</section>
-<section id="numbers-must-agree-everywhere" class="level2">
-<h2 class="anchored" data-anchor-id="numbers-must-agree-everywhere">Numbers must agree everywhere</h2>
-<p>The most useful thing I did was keep a single master file with every number and its source. The analytic sample for the suspension study is 6,351, not the 17,000 records I had access to. The tweet corpus was 7.8 million collected and 5.5 million analyzed in 2023, and 8.6 million analyzed in the 2026 rebuild; the resume and this site had better say the same thing. A recruiter who spots one drifting number stops believing the rest.</p>
-</section>
-<section id="what-hurt" class="level2">
-<h2 class="anchored" data-anchor-id="what-hurt">What hurt</h2>
-<p>Cutting the teaching. Thirteen terms of instruction compressed to one bullet, and the courses I was proudest of are not named. Cutting the theatre degree to half a line. Cutting the dog from the summary (he is back on the About page). None of it was wrong to cut; the page is for the reader.</p>
-</section>
-<section id="the-rules-in-one-place" class="level2">
-<h2 class="anchored" data-anchor-id="the-rules-in-one-place">The rules, in one place</h2>
-<p>Rebuild from the job, do not trim the CV. One master file, every number sourced. Verb, thing, scale, result. Titles the reader understands. Publications as a count and a link. Tools named only where they were actually used. One page for analyst roles, two for research-scientist roles, never a page and a quarter. And a plain-text paste test before sending, because a two-column template looks fine and parses as soup.</p>
-
-
-</section>
-
- ]]></description>
-  <category>career</category>
-  <category>writing</category>
-  <guid>https://zjschroeder.com/blog/posts/2026-09-17-cv-to-resume/</guid>
-  <pubDate>Thu, 17 Sep 2026 05:00:00 GMT</pubDate>
-</item>
+<lastBuildDate>Fri, 18 Sep 2026 20:48:23 GMT</lastBuildDate>
 </channel>
 </rss>

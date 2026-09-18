@@ -1,0 +1,35 @@
+---
+title: "Dashboards"
+toc: false
+aliases:
+  - /tools/
+---
+
+I built these to be used either in teaching or for fun as exercises in creating shiny dashboards. All of them run in the browser or on a free host; source is on GitHub.
+
+:::::::: grid
+::: {.g-col-12 .g-col-md-6}
+### [Teach Yourself SQL](https://zjschroeder.github.io/SQL_tutorial/)
+
+A browser-only Shiny app that teaches SQL to people who already know the basics of R that I built to teach myself SQL. Each tab builds one clause of a query on a live SQLite database then gives users a live editor to test their knowledge. [Source](https://github.com/zjschroeder/SQL_tutorial)
+:::
+
+::: {.g-col-12 .g-col-md-6}
+### [Self-guided Tour of T-Tests and ANOVA](https://zjschroeder.github.io/t_tests_and_anova/)
+
+A ground-up visual explanation of common statistical procedures that uses interactive figures to (hopefully) demystify some of the more obtuse concepts. [Source](https://github.com/zjschroeder/t_tests_and_anova)
+:::
+
+::: {.g-col-12 .g-col-md-6}
+### [Global Data on Teacher Pay and Job Satisfaction](https://zjschroeder.github.io/teacher_salaries/)
+
+An interactive dashboard on teacher salaries and working hours (R, flexdashboard, plotly). [Source](https://github.com/zjschroeder/teacher_salaries)
+:::
+
+::: {.g-col-12 .g-col-md-6}
+### [LA28 Olympic Schedule Builder](https://zjschroeder.shinyapps.io/la28_scheduling_app/)
+
+In preparation for the LA28 Olympic Games, this little app creates custom schedules for different events based on user interest, budget, and location. First load may take a few seconds while the free host wakes up. [Source](https://github.com/zjschroeder/la28_scheduling_app)
+:::
+
+::::::::

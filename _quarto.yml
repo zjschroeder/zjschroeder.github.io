@@ -14,8 +14,8 @@ website:
     left:
       - text: Projects
         href: projects/index.qmd
-      - text: Tools
-        href: tools/index.qmd
+      - text: Dashboards
+        href: dashboards/index.qmd
       - text: Blog
         href: blog/index.qmd
       - text: Publications
