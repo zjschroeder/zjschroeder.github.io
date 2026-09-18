@@ -44,7 +44,8 @@ website:
 format:
   html:
     theme:
-      light: [cosmo, styles.scss]
+      light: [litera, styles.scss]
+      dark: [darkly, styles-dark.scss]
     css: styles.css
     toc: true
     toc-depth: 2
