@@ -1,6 +1,0 @@
-study,study_id,short_label,long_label,target_type,n_targets,collection
-study1,1,Cancel Culture,Cancel-culture discourse (the #cancelculture meme),meme,NA,2022-11
-study2,2,Is Over Party,"""Is over party"" cancellation hashtag",hashtag,NA,2022-11
-study3,3,Academics,Canceled academic faculty,academic faculty,65,2023-01
-study4,4,Celebrities,Canceled celebrities,celebrity,12,2022-11/12
-study5,5,Civilians,Canceled civilians (viral racism cases),private individual,7,2022-11
