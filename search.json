@@ -1,0 +1,79 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I am Zach Schroeder. I finished a PhD in Psychology at the University of Oregon in Spring 2026, with a specialization in Educational Data Science, and I now work from Minneapolis. More about me when I figure out what I’m all about.\nRésumé (PDF) · schroeder.zacharyj@gmail.com · GitHub · LinkedIn · Google Scholar"
+  },
+  {
+    "objectID": "publications.html",
+    "href": "publications.html",
+    "title": "Publications",
+    "section": "",
+    "text": "Full record on Google Scholar."
+  },
+  {
+    "objectID": "publications.html#peer-reviewed",
+    "href": "publications.html#peer-reviewed",
+    "title": "Publications",
+    "section": "Peer-reviewed",
+    "text": "Peer-reviewed\nSchroeder, Z. J., & Hodges, S. D. (2025). Gender and social belonging predict evaluation of ambiguous academic feedback. Social Psychology of Education, 28(1), 91. https://doi.org/10.1007/s11218-024-10003-7\nSchroeder, Z. J., Husman, J., & Hodges, S. D. (2025). Inferential accuracy in classroom contexts. Frontiers in Psychology, 16, 1647219. doi:10.3389/fpsyg.2025.1647219"
+  },
+  {
+    "objectID": "publications.html#preprints-and-dissertation",
+    "href": "publications.html#preprints-and-dissertation",
+    "title": "Publications",
+    "section": "Preprints and dissertation",
+    "text": "Preprints and dissertation\nKezer, M., Schroeder, Z. J., & Hodges, S. D. (2026). Computational modeling of thought-feeling accuracy using sentence embeddings. PsyArXiv. doi:10.31234/osf.io/t93kh_v1\nSchroeder, Z. J. (2026). Utilizing coordinated data analysis to examine structural, linguistic, and discursive predictors of thought-feeling inferences in inferential accuracy research. Doctoral dissertation, University of Oregon. ProQuest Dissertation and Theses"
+  },
+  {
+    "objectID": "publications.html#in-preparation",
+    "href": "publications.html#in-preparation",
+    "title": "Publications",
+    "section": "In preparation",
+    "text": "In preparation\nSchroeder, Z. J. Cancel culture as networked moral outrage.\nSchroeder, Z. J. Personality, race, sex, and school discipline: Two national longitudinal studies."
+  },
+  {
+    "objectID": "publications.html#conference-presentations",
+    "href": "publications.html#conference-presentations",
+    "title": "Publications",
+    "section": "Conference presentations",
+    "text": "Conference presentations\nSchroeder, Z. J., & Hodges, S. D. (2023). Complications in a common effect: Empathy measures show surprising variability in better-than-average effects. International Convention of Psychological Science, Brussels.\nSchroeder, Z. J. (2023). “Cancelled,” that’s good enough for me: Tracing affective flow and dehumanization in tweets participating in “cancel culture.” Society for Personality and Social Psychology, Atlanta.\nSchroeder, Z. J., & Hodges, S. D. (2022). Better than average effects in self-described empathy. American Psychological Association (online).\nSchroeder, Z. J., & Hodges, S. D. (2022). Novel advances in empathic accuracy measurement paradigms for educational contexts. Society for Personality and Social Psychology (online).\nSchroeder, Z. J., & Hodges, S. D. (2021). Student perceptions of ambiguous academic feedback. Society for Personality and Social Psychology (online).\nSchroeder, Z. J., & Hodges, S. D. (2020). Gender preferences in career-relevant feedback format. Society for Personality and Social Psychology, Gender Pre-conference, New Orleans.\nSchroeder, Z. J., & Gardner, W. L. (2019). Loving-kindness and racial prejudice: Maybe love really is all you need. Society for Personality and Social Psychology, Portland."
+  },
+  {
+    "objectID": "tools/index.html",
+    "href": "tools/index.html",
+    "title": "Tools",
+    "section": "",
+    "text": "Things I built that other people use. All of them run in the browser or on a free host; source is on GitHub.\n\n\nStep by Step SQL\nA browser-only Shiny app that teaches SQL to people who already know data frames. Each tab builds one clause of a query on a live SQLite database (a fictional research institute with six linked tables and deliberately awkward NULLs), then hands you a live editor. Runs on webR, nothing to install. Source\n\n\nt-tests and ANOVA, step by step\nFive tests rebuilt from raw data for an undergraduate statistics lab, each step shown three ways at once: formal notation, plain English, and the lab’s own scenario with real numbers. Okabe-Ito palette, automated tests in the repo, runs in the browser. Source\n\n\nSo, you want to be a teacher?\nAn interactive dashboard on U.S. teacher salaries and working hours (R, flexdashboard, plotly). Source\n\n\nLA28 Olympic schedule builder\nRate every sport, set a ticket budget, and a greedy optimizer with zone-cohesion penalties builds a day-by-day schedule from 251 sessions, with charts and CSV/Excel export. First load takes a few seconds while the free host wakes up. Source\n\n\nEmpathic-accuracy data collection app\nA Shiny app for collecting empathic-accuracy data online, used in the lab’s studies. Source"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Zach Schroeder",
+    "section": "",
+    "text": "Email  GitHub  LinkedIn  Scholar  Résumé\n\n\nI’m a behavioral scientist and statistician with seven years of experience researching interpersonal perception: how do we understand one another in person, online, and in the classroom? In doing so, my work has included building pipelines to transcribe and analyze 20 years of video-recorded conversations to understand what the best cues are for understanding what someone’s thinking, examining emotional and semantic drift in almost 8 million Tweets discussing ‘cancel culture’ on social media, and using survey data to understand how students’ feelings of belonging impact how they interpret ambiguous academic feedback\nBased in Minneapolis, if I’m not wrangling data at my desk, I’m either getting lost in the woods with my dog, trying to bake as well as my grandfather, or working on the NYT crossword."
+  },
+  {
+    "objectID": "index.html#featured-projects",
+    "href": "index.html#featured-projects",
+    "title": "Zach Schroeder",
+    "section": "Featured projects",
+    "text": "Featured projects\n\n\n\n\nNo matching items\n\nAll projects →"
+  },
+  {
+    "objectID": "projects/index.html",
+    "href": "projects/index.html",
+    "title": "Projects",
+    "section": "",
+    "text": "Projects coming soon!\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "blog/index.html",
+    "href": "blog/index.html",
+    "title": "Blog",
+    "section": "",
+    "text": "Methods, analyses, observations, etc.\n\n\n\n\n\n\n\n\nNo matching items"
+  }
+]
