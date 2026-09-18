@@ -1,0 +1,17 @@
+outcome,mean_liberal,mean_conservative,cohens_d_con_minus_lib,eta_sq_lean
+care,0.00371,0.00381,0.006,0
+harm,0.00657,0.00748,0.042,4e-4
+fairness,0.00196,0.00187,-0.008,0
+cheating,9.9e-4,8.2e-4,-0.021,1e-4
+loyalty,0.00575,0.00647,0.035,3e-4
+betrayal,0.00175,0.0021,0.032,3e-4
+authority,0.00774,0.00741,-0.015,1e-4
+subversion,0.00256,0.00301,0.034,3e-4
+sanctity,0.00139,0.00131,-0.009,0
+degradation,0.00198,0.00264,0.048,5e-4
+outrage_proxy,0.01384,0.01605,0.063,0.001
+moral_total,0.04577,0.04837,0.042,4e-4
+like_rate,0.02121,0.01839,-0.007,0
+retweet_rate,0.00166,0.00147,-0.005,0
+reply_rate,1.1e-4,3e-5,-0.011,0
+quote_rate,2.4e-4,3.3e-4,0.008,0

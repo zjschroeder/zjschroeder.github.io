@@ -1,0 +1,40 @@
+---
+title: "Zach Schroeder"
+subtitle: "Data scientist and mixed-methods researcher"
+toc: false
+title-block-banner: false
+listing:
+  id: featured
+  contents:
+    - projects/cancel-culture/index.qmd
+    - projects/conversation-measures/index.qmd
+    - projects/personality-suspension/index.qmd
+  type: grid
+  grid-columns: 3
+  fields: [image, title, description]
+  image-height: 150px
+  sort: false
+---
+
+::: {.grid .hero}
+
+::: {.g-col-12 .g-col-md-4}
+![](assets/headshot.jpeg){.hero-img}
+
+[<i class="bi bi-envelope"></i> Email](mailto:schroeder.zacharyj@gmail.com){.btn .btn-outline-primary .btn-sm} [<i class="bi bi-github"></i> GitHub](https://github.com/zjschroeder){.btn .btn-outline-primary .btn-sm} [<i class="bi bi-linkedin"></i> LinkedIn](https://www.linkedin.com/in/zachary-schroeder-1816a2241/){.btn .btn-outline-primary .btn-sm} [<i class="bi bi-mortarboard"></i> Scholar](https://scholar.google.com/citations?user=PSr7CB4AAAAJ){.btn .btn-outline-primary .btn-sm} [<i class="bi bi-file-earmark-text"></i> Résumé](resume.pdf){.btn .btn-outline-primary .btn-sm}
+:::
+
+::: {.g-col-12 .g-col-md-8}
+I'm a behavioral scientist and statistician with seven years of experience researching interpersonal perception: how do we understand one another in person, online, and in the classroom? In doing so, my work has included building pipelines to transcribe and analyze 20 years of video-recorded conversations to understand what the best cues are for understanding what someone's thinking, examining emotional and semantic drift in almost 8 million Tweets discussing 'cancel culture' on social media, and using survey data to understand how students' feelings of belonging impact how they interpret ambiguous academic feedback
+
+Based in Minneapolis, if I'm not wrangling data at my desk, I'm either getting lost in the woods with my dog, trying to bake as well as my grandfather, or working on the NYT crossword.
+:::
+
+:::
+
+## Featured projects
+
+::: {#featured}
+:::
+
+[All projects →](projects/index.qmd)

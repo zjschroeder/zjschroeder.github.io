@@ -1,0 +1,14 @@
+---
+title: "Projects"
+toc: false
+listing:
+  contents:
+    - "*/index.qmd"
+  type: default
+  sort: "date desc"
+  fields: [image, date, title, description, categories]
+  image-height: 160px
+  categories: true
+---
+
+Projects coming soon!

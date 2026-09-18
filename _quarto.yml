@@ -1,0 +1,57 @@
+project:
+  type: website
+  output-dir: _site
+  resources:
+    - CNAME
+
+website:
+  title: "Zach Schroeder"
+  site-url: https://zjschroeder.com
+  description: "Zach Schroeder, PhD. Data scientist and mixed-methods researcher: NLP on conversation and text at scale, Bayesian modeling, experiments."
+  favicon: assets/favicon.svg
+  open-graph: true
+  navbar:
+    left:
+      - text: Projects
+        href: projects/index.qmd
+      - text: Tools
+        href: tools/index.qmd
+      - text: Blog
+        href: blog/index.qmd
+      - text: Publications
+        href: publications.qmd
+      - text: About
+        href: about.qmd
+    right:
+      - text: Résumé
+        href: resume.pdf
+      - icon: github
+        href: https://github.com/zjschroeder
+        aria-label: GitHub
+      - icon: linkedin
+        href: https://www.linkedin.com/in/zachary-schroeder-1816a2241/
+        aria-label: LinkedIn
+  page-footer:
+    left: "© 2026 Zachary J. Schroeder. Built with Quarto."
+    right:
+      - icon: envelope
+        href: mailto:schroeder.zacharyj@gmail.com
+      - icon: github
+        href: https://github.com/zjschroeder
+      - text: Google Scholar
+        href: https://scholar.google.com/citations?user=PSr7CB4AAAAJ
+
+format:
+  html:
+    theme:
+      light: [cosmo, styles.scss]
+    css: styles.css
+    toc: true
+    toc-depth: 2
+    code-copy: true
+    code-overflow: wrap
+    link-external-newwindow: true
+    smooth-scroll: true
+
+execute:
+  freeze: auto

@@ -1,0 +1,8 @@
+---
+title: "About"
+toc: false
+---
+
+I am Zach Schroeder. I finished a PhD in Psychology at the University of Oregon in Spring 2026, with a specialization in Educational Data Science, and I now work from Minneapolis. More *about me* when I figure out what I'm all about.
+
+[Résumé (PDF)](resume.pdf) · [schroeder.zacharyj@gmail.com](mailto:schroeder.zacharyj@gmail.com) · [GitHub](https://github.com/zjschroeder) · [LinkedIn](https://www.linkedin.com/in/zachary-schroeder-1816a2241/) · [Google Scholar](https://scholar.google.com/citations?user=PSr7CB4AAAAJ)

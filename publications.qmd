@@ -1,0 +1,40 @@
+---
+title: "Publications"
+toc: false
+---
+
+Full record on [Google Scholar](https://scholar.google.com/citations?user=PSr7CB4AAAAJ).
+
+## Peer-reviewed
+
+Schroeder, Z. J., & Hodges, S. D. (2025). Gender and social belonging predict evaluation of ambiguous academic feedback. *Social Psychology of Education, 28*(1), 91. [https://doi.org/10.1007/s11218-024-10003-7](https://doi.org/10.1007/s11218-024-10003-7)
+
+Schroeder, Z. J., Husman, J., & Hodges, S. D. (2025). Inferential accuracy in classroom contexts. *Frontiers in Psychology, 16*, 1647219. [doi:10.3389/fpsyg.2025.1647219](https://doi.org/10.3389/fpsyg.2025.1647219)
+
+## Preprints and dissertation
+
+Kezer, M., Schroeder, Z. J., & Hodges, S. D. (2026). Computational modeling of thought-feeling accuracy using sentence embeddings. PsyArXiv. [doi:10.31234/osf.io/t93kh_v1](https://doi.org/10.31234/osf.io/t93kh_v1)
+
+Schroeder, Z. J. (2026). *Utilizing coordinated data analysis to examine structural, linguistic, and discursive predictors of thought-feeling inferences in inferential accuracy research.* Doctoral dissertation, University of Oregon. [ProQuest Dissertation and Theses](https://www.proquest.com/openview/09081a46367f099bd1cf2fd2c0c3d5af/1?pq-origsite=gscholar&cbl=18750&diss=y)
+
+## In preparation
+
+Schroeder, Z. J. *Cancel culture as networked moral outrage.* 
+
+Schroeder, Z. J. Personality, race, sex, and school discipline: Two national longitudinal studies. 
+
+## Conference presentations
+
+Schroeder, Z. J., & Hodges, S. D. (2023). Complications in a common effect: Empathy measures show surprising variability in better-than-average effects. International Convention of Psychological Science, Brussels.
+
+Schroeder, Z. J. (2023). "Cancelled," that's good enough for me: Tracing affective flow and dehumanization in tweets participating in "cancel culture." Society for Personality and Social Psychology, Atlanta.
+
+Schroeder, Z. J., & Hodges, S. D. (2022). Better than average effects in self-described empathy. American Psychological Association (online).
+
+Schroeder, Z. J., & Hodges, S. D. (2022). Novel advances in empathic accuracy measurement paradigms for educational contexts. Society for Personality and Social Psychology (online).
+
+Schroeder, Z. J., & Hodges, S. D. (2021). Student perceptions of ambiguous academic feedback. Society for Personality and Social Psychology (online).
+
+Schroeder, Z. J., & Hodges, S. D. (2020). Gender preferences in career-relevant feedback format. Society for Personality and Social Psychology, Gender Pre-conference, New Orleans.
+
+Schroeder, Z. J., & Gardner, W. L. (2019). Loving-kindness and racial prejudice: Maybe love really is all you need. Society for Personality and Social Psychology, Portland.
