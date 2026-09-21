@@ -1,11 +1,15 @@
 [
   {
-    "listing": "/projects/index.html",
-    "items": []
+    "listing": "/index.html",
+    "items": [
+      "/projects/cancel-culture/index.html"
+    ]
   },
   {
-    "listing": "/index.html",
-    "items": []
+    "listing": "/projects/index.html",
+    "items": [
+      "/projects/cancel-culture/index.html"
+    ]
   },
   {
     "listing": "/blog/index.html",
