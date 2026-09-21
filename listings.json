@@ -1,14 +1,16 @@
 [
   {
-    "listing": "/index.html",
+    "listing": "/projects/index.html",
     "items": [
-      "/projects/cancel-culture/index.html"
+      "/projects/cancel-culture/index.html",
+      "/projects/conversation-measures/index.html"
     ]
   },
   {
-    "listing": "/projects/index.html",
+    "listing": "/index.html",
     "items": [
-      "/projects/cancel-culture/index.html"
+      "/projects/cancel-culture/index.html",
+      "/projects/conversation-measures/index.html"
     ]
   },
   {

@@ -21,6 +21,83 @@
     "text": "Fun with Data\n\n\nLA28 Olympic Schedule Builder\nIn preparation for the LA28 Olympic Games, this little app creates custom schedules for different events based on user interest, budget, and location. First load may take a few seconds while the free host wakes up. Source"
   },
   {
+    "objectID": "projects/conversation-measures/index.html",
+    "href": "projects/conversation-measures/index.html",
+    "title": "Which parts of a conversation carry the signal? Building and validating a text pipeline on 74 hours of recorded talk",
+    "section": "",
+    "text": "In brief. I had six studies, collected over ten years by different people with different designs, in which observers watched recorded conversations and wrote down what they thought a speaker was thinking. The speakers had written down what they were thinking too. The job was to find out which parts of the conversation predicted each. I transcribed 74 hours of video, split it into utterances, labeled each one, scored how closely it matched each written guess and each written thought, and modeled that score over the course of the conversation. Two results held across all six studies. What was said most recently predicts both the guess and the truth. Which person said it makes no difference.\n\n74 hours of audio6 studies1,346 observers11,906 written guessesWhispersentence embeddingstransformer ensembleBayesian GPbrms / Stanmeta-analysis\ntraj = FileAttachment(\"data/trajectories.csv\").csv({typed: true})\nviewof side = Inputs.radio(new Map([[\"what observers guessed\", \"perceiver\"], [\"what speakers said they were thinking\", \"target\"]]), {label: \"Compare speech with\", value: \"perceiver\"})\nviewof overlay = Inputs.toggle({label: \"Show each study\", value: true})\npooled = traj.filter(d =&gt; d.side === side && d.level === \"pooled\")\nstudiesSel = traj.filter(d =&gt; d.side === side && d.level === \"study\")\nspeakerColor = ({domain: [\"Target\", \"Interactant\"], range: [\"#123F36\", \"#C49A45\"]})\nspeakerName = new Map([[\"Target\", \"the speaker being judged\"], [\"Interactant\", \"their conversation partner\"]])\nPlot.plot({\n  width: 720, height: 360, marginLeft: 55, marginRight: 20,\n  x: {label: \"Position in the conversation segment →\", domain: [0, 1], tickFormat: d =&gt; d === 0 ? \"start\" : d === 1 ? \"end\" : d},\n  y: {label: \"↑ Similarity between speech and \" + (side === \"perceiver\" ? \"the observer's guess\" : \"the speaker's thought\"), grid: true, domain: [0, 0.3]},\n  color: {...speakerColor, legend: true, tickFormat: d =&gt; \"Words spoken by \" + speakerName.get(d)},\n  marks: [\n    overlay ? Plot.line(studiesSel, {x: \"time\", y: \"mean\", z: d =&gt; d.study + d.speaker, stroke: \"speaker\", strokeOpacity: 0.3, strokeWidth: 1.2, tip: true, title: d =&gt; `${d.study} (${d.paradigm})\\nwords by ${speakerName.get(d.speaker)}\\nsimilarity ${d.mean.toFixed(3)} at ${Math.round(d.time * 100)}% of segment`}) : null,\n    Plot.areaY(pooled, {x: \"time\", y1: \"lower\", y2: \"upper\", fill: \"speaker\", fillOpacity: 0.15}),\n    Plot.line(pooled, {x: \"time\", y: \"mean\", stroke: \"speaker\", strokeWidth: 3, tip: true, title: d =&gt; `All studies pooled\\nwords by ${speakerName.get(d.speaker)}\\nsimilarity ${d.mean.toFixed(3)} (90% interval ${d.lower.toFixed(3)} to ${d.upper.toFixed(3)})\\nat ${Math.round(d.time * 100)}% of segment`})\n  ]\n})"
+  },
+  {
+    "objectID": "projects/conversation-measures/index.html#the-problem",
+    "href": "projects/conversation-measures/index.html#the-problem",
+    "title": "Which parts of a conversation carry the signal? Building and validating a text pipeline on 74 hours of recorded talk",
+    "section": "The problem",
+    "text": "The problem\nEarlier studies asked whether words mattered by muting the audio and checking whether accuracy dropped. It did. Nobody had asked which words, said when, by whom. The same question shows up in industry under other names: which part of a support call predicts the CSAT score, which minutes of a sales call predict the close, which turns of a user interview a summary should keep. Answering it takes a pipeline that turns recorded talk into a measurement, and a way to know how far to trust each step."
+  },
+  {
+    "objectID": "projects/conversation-measures/index.html#the-data",
+    "href": "projects/conversation-measures/index.html#the-data",
+    "title": "Which parts of a conversation carry the signal? Building and validating a text pipeline on 74 hours of recorded talk",
+    "section": "The data",
+    "text": "The data\n\n\n\n\n\n\nNote\n\n\n\nSix studies, 2012 to 2022. 74 hours of video, 1,346 observers, 956 speakers, 11,906 written guesses, between 3,300 and 68,300 utterances per study. Two studies were interview-style (many observers judging a few recorded speakers); four were live two-person conversations where each person later judged the other. Transcripts and written responses are IRB-restricted and stay in the lab. This page shows model summaries only. The code runs end to end on simulated data with the same structure."
+  },
+  {
+    "objectID": "projects/conversation-measures/index.html#what-i-built",
+    "href": "projects/conversation-measures/index.html#what-i-built",
+    "title": "Which parts of a conversation carry the signal? Building and validating a text pipeline on 74 hours of recorded talk",
+    "section": "What I built",
+    "text": "What I built\nTranscription and segmentation. Whisper transcribed the video; research assistants corrected it and tagged speakers. Splitting speaker turns into single utterances is the step most people skip, so I hand-coded 5,000 utterances, fine-tuned a segmentation model on them, and tested it on 500 held-out utterances: 96.8% agreement on boundaries.\nLabeling what each utterance does. Each utterance was tagged as a question, a statement, a suggestion, an agreement, and so on, using four transformer models (DeepPavlov, RoBERTa, ConvBERT, DeBERTa) with a weighted vote that favors agreement among models over one model’s confidence. On 1,000 held-out utterances the vote scored 93.4%. Published single-model results on this task run from 85.8% to 91.6%.\nScoring similarity. Every utterance, every written guess, and every written thought became a sentence embedding (all-MiniLM-L6-v2). The outcome is the cosine similarity between an utterance and the guess or thought it was paired with. Small numbers, but consistent ones: study averages run from 0.11 to 0.18, with individual pairs ranging from about −0.2 to 0.9.\nModeling the shape over time. How similarity changes across a conversation was fit with Bayesian Gaussian process models (brms and Stan, Matérn 3/2 kernel), which let the curve take whatever shape the data support instead of a line or a quadratic picked in advance. Each study was fit separately, then the curves were pooled with a random-effects meta-analysis that reports how much the studies disagree at every point. Six alternative prior settings and a smoother kernel were run on every model. The reasonable priors moved estimates by under 10%. The smoother kernel would not fit, and that is reported too.\n\n\n\n\n\n\n\n\nStep\nCheck\nResult\n\n\n\n\nUtterance segmentation\n500 held-out utterances vs hand coding\n96.8%\n\n\nUtterance-type labels\n1,000 held-out utterances vs hand coding\n93.4%\n\n\nPrior sensitivity\n6 alternative prior sets, all models\n&lt; 10% change\n\n\nConvergence\nRhat and effective sample size, every model\n1 study excluded"
+  },
+  {
+    "objectID": "projects/conversation-measures/index.html#what-came-out",
+    "href": "projects/conversation-measures/index.html#what-came-out",
+    "title": "Which parts of a conversation carry the signal? Building and validating a text pipeline on 74 hours of recorded talk",
+    "section": "What came out",
+    "text": "What came out\nThe most recent words carry the signal. Similarity rises toward the end of the segment whether the comparison is with the observer’s guess or with the speaker’s own report. That second part is what makes the first part useful. If observers simply echoed the last thing said, the trend would show up on their side only. It shows up on both, so the end of a segment holds the information and observers are reading it.\nWho said it does not matter. The speaker’s own words were no closer to the guess, or to the thought, than the partner’s words. This held in every live-conversation study and at every point in the segment. A null on both sides is worth having. It means a model of what someone is thinking should read the whole exchange, not just their turns.\nSuggestions are the exception, and observers only half catch it. When the type of each utterance is added to the model, one type stands out. Suggestions (advice, recommendations, proposals) were the utterances closest to what speakers reported thinking, with strong evidence for both speakers. For observers’ guesses the point estimate lands in the same place but the evidence does not hold up: the interval reaches zero, and suggestions were rare enough in the recordings that the estimate rests on a few hundred utterances.\n\nda = FileAttachment(\"data/dialogue_act_pooled.csv\").csv({typed: true})\nactOrder = [\"suggestion\", \"question\", \"inform\", \"functional\", \"disagreement\", \"agreement\", \"acknowledgment\"]\nactLabel = new Map([[\"suggestion\", \"Suggestion\"], [\"question\", \"Question\"], [\"inform\", \"Statement\"], [\"functional\", \"Functional\"], [\"disagreement\", \"Disagreement\"], [\"agreement\", \"Agreement\"], [\"acknowledgment\", \"Acknowledgment\"]])\nsideLabel = new Map([[\"perceiver\", \"vs what observers guessed\"], [\"target\", \"vs what speakers were thinking\"]])\n// pool the two speakers (inverse-variance), then express each type as its distance from the average of the other six\ndaPooled = d3.groups(da, d =&gt; d.side, d =&gt; d.dialogue_act).flatMap(([side, acts]) =&gt; {\n  const rows = acts.map(([act, g]) =&gt; {\n    const w = g.map(d =&gt; 1 / Math.pow((d.upper - d.lower) / 3.92, 2));\n    const m = d3.sum(g.map((d, i) =&gt; d.mean * w[i])) / d3.sum(w);\n    return {side, act, m, se: Math.sqrt(1 / d3.sum(w))};\n  });\n  return rows.map(r =&gt; {\n    const others = rows.filter(o =&gt; o.act !== r.act);\n    const base = d3.mean(others, o =&gt; o.m);\n    return {side: sideLabel.get(side), act: actLabel.get(r.act), dev: r.m - base, lo: r.m - base - 1.96 * r.se, hi: r.m - base + 1.96 * r.se, m: r.m, base};\n  });\n})\nPlot.plot({\n  width: 720, height: 300, marginLeft: 105, marginRight: 20,\n  y: {label: null, domain: actOrder.map(a =&gt; actLabel.get(a))},\n  x: {label: \"Similarity, relative to the average of the other six utterance types →\", domain: [-0.06, 0.08], grid: true, tickFormat: d =&gt; (d &gt; 0 ? \"+\" : \"\") + d.toFixed(2)},\n  color: {domain: [\"vs what observers guessed\", \"vs what speakers were thinking\"], range: [\"#8a8f98\", \"#123F36\"], legend: true},\n  marks: [\n    Plot.ruleX([0], {stroke: \"#374151\"}),\n    ...[\"vs what observers guessed\", \"vs what speakers were thinking\"].map((sd, k) =&gt; Plot.ruleY(daPooled.filter(d =&gt; d.side === sd), {y: \"act\", x1: \"lo\", x2: \"hi\", stroke: \"side\", strokeWidth: 2, dy: k === 0 ? -5 : 5})),\n    ...[\"vs what observers guessed\", \"vs what speakers were thinking\"].map((sd, k) =&gt; Plot.dot(daPooled.filter(d =&gt; d.side === sd), {y: \"act\", x: \"dev\", fill: \"side\", r: 4.5, dy: k === 0 ? -5 : 5, tip: true, title: d =&gt; `${d.act}, ${d.side}\\n${d.dev &gt;= 0 ? \"+\" : \"\"}${d.dev.toFixed(3)} relative to the other types (95% interval ${d.lo.toFixed(3)} to ${d.hi.toFixed(3)})\\npooled mean ${d.m.toFixed(3)}, other types average ${d.base.toFixed(3)}`}))\n  ]\n})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHow much each utterance type stands out from the rest, on each side of the comparison. Zero is the average of the other six types; a point to the right means that type matched more closely than the others did. Both speakers are pooled, since who spoke made no difference. Suggestions are the only type whose interval clears zero on the speakers’ side (green). On the observers’ side (grey) the point is in the same place but the interval reaches back to zero, and it rests on only 801 suggestion utterances across four studies, so the evidence there is thin. Intervals reflect each type’s own uncertainty."
+  },
+  {
+    "objectID": "projects/conversation-measures/index.html#what-this-is-good-for",
+    "href": "projects/conversation-measures/index.html#what-this-is-good-for",
+    "title": "Which parts of a conversation carry the signal? Building and validating a text pipeline on 74 hours of recorded talk",
+    "section": "What this is good for",
+    "text": "What this is good for\nThe pipeline is the product. It takes recorded conversation from any source, produces a validated utterance-level dataset with type labels, and fits a time-varying model with the uncertainty attached. The same code would run on call-center audio, sales calls, or interview recordings with the transcripts swapped in.\nTwo lessons carry over. Publish the holdout number next to every automated label; a 93% label and a 70% label should not enter a model the same way. And plan cluster sizes before collecting. These hierarchical models needed roughly 40 speakers per study to converge, ten times what this field usually records, and the study with 9 speakers had to be dropped from half the analyses. Sessions within users and calls within agents have the same constraint."
+  },
+  {
+    "objectID": "projects/conversation-measures/index.html#limits",
+    "href": "projects/conversation-measures/index.html#limits",
+    "title": "Which parts of a conversation carry the signal? Building and validating a text pipeline on 74 hours of recorded talk",
+    "section": "Limits",
+    "text": "Limits\nSimilarity is not attention. The data show that guesses resemble recent speech; whether observers are consciously using it is an inference. The two interview-style studies had too few speakers to model on the speaker side, so the design differences visible in the first figure are mapped on the observer side only. The utterance types are broad; a finer scheme might sharpen or dissolve the suggestion result. If I ran this again I would fix the number of speakers per study before anything else, because that decided which questions could be asked at all."
+  },
+  {
+    "objectID": "projects/conversation-measures/index.html#links",
+    "href": "projects/conversation-measures/index.html#links",
+    "title": "Which parts of a conversation carry the signal? Building and validating a text pipeline on 74 hours of recorded talk",
+    "section": "Links",
+    "text": "Links\n\nDissertation: Utilizing Coordinated Data Analysis to Examine Structural, Linguistic, and Discursive Predictors of Thought-Feeling Inferences in Inferential Accuracy Research, University of Oregon, 2026\nData behind the figures: model summaries in the site repository\nSupported by a National Science Foundation Graduate Research Fellowship (2236419)"
+  },
+  {
+    "objectID": "projects/index.html",
+    "href": "projects/index.html",
+    "title": "Projects",
+    "section": "",
+    "text": "Projects coming soon!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMoral and Partisan Differences in Cancel Culture Discourse\n\n\n\nNLP\n\ntext analytics\n\nmeasurement validation\n\nPython\n\nR\n\nHPC\n\n\n\n\n\n\n\n\n\nJul 22, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nWhich parts of a conversation carry the signal? Building and validating a text pipeline on 74 hours of recorded talk\n\n\n\nNLP\n\nBayesian modeling\n\nmeta-analysis\n\nmeasurement validation\n\nR\n\nPython\n\nObservable\n\n\n\nSix old datasets, one measurement pipeline, every automated step checked against human coders. The last thing said predicts what a speaker was thinking; who said it does not.\n\n\n\n\n\nApr 10, 2026\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Zach Schroeder",
+    "section": "",
+    "text": "Email  GitHub  LinkedIn  Scholar  Résumé\n\n\nHow do we use language understand one another?\nI’m a behavioral scientist and statistician with seven years of experience researching this question. In that time, I’ve built an analytic pipeline that transcribed and analyzed 20 years of video-recorded conversations to identify the best cues for understanding what someone is thinking; I examined emotional and semantic drift in ~8 million Tweets discussing ‘cancel culture’ on social media, building comprehensive timelines of how outrage builds and dissipates over time; and I used survey data to understand how students’ feelings of belonging impact how they interpret ambiguous academic feedback\nIf I’m not wrangling data at my desk, I’m deep in the woods with my dog."
+  },
+  {
+    "objectID": "index.html#featured-projects",
+    "href": "index.html#featured-projects",
+    "title": "Zach Schroeder",
+    "section": "Featured projects",
+    "text": "Featured projects\n\n\n\n\n\n\n\n\n\n\nMoral and Partisan Differences in Cancel Culture Discourse\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhich parts of a conversation carry the signal? Building and validating a text pipeline on 74 hours of recorded talk\n\n\nSix old datasets, one measurement pipeline, every automated step checked against human coders. The last thing said predicts what a speaker was thinking; who said it does not.\n\n\n\n\n\nNo matching items\n\nAll projects →"
+  },
+  {
     "objectID": "projects/cancel-culture/index.html",
     "href": "projects/cancel-culture/index.html",
     "title": "Moral and Partisan Differences in Cancel Culture Discourse",
@@ -68,27 +145,6 @@
     "title": "Moral and Partisan Differences in Cancel Culture Discourse",
     "section": "Links",
     "text": "Links\n\nCode: github.com/zjschroeder/Cancel-Culture-Text-Analysis\nData behind the figures: aggregate CSVs in the site repository\nWorking manuscript: Cancel Culture as Networked Moral Outrage (in preparation; ask me for the current draft)\nMethod adapted from Essig, L., & DellaPosta, D. (2024). Self-presentation in Twitter bios. Scientific Reports."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Zach Schroeder",
-    "section": "",
-    "text": "Email  GitHub  LinkedIn  Scholar  Résumé\n\n\nHow do we use language understand one another?\nI’m a behavioral scientist and statistician with seven years of experience researching this question. In that time, I’ve built an analytic pipeline that transcribed and analyzed 20 years of video-recorded conversations to identify the best cues for understanding what someone is thinking; I examined emotional and semantic drift in ~8 million Tweets discussing ‘cancel culture’ on social media, building comprehensive timelines of how outrage builds and dissipates over time; and I used survey data to understand how students’ feelings of belonging impact how they interpret ambiguous academic feedback\nIf I’m not wrangling data at my desk, I’m deep in the woods with my dog."
-  },
-  {
-    "objectID": "index.html#featured-projects",
-    "href": "index.html#featured-projects",
-    "title": "Zach Schroeder",
-    "section": "Featured projects",
-    "text": "Featured projects\n\n\n\n\n\n\n\n\n\n\nMoral and Partisan Differences in Cancel Culture Discourse\n\n\n\n\n\n\n\n\nNo matching items\n\nAll projects →"
-  },
-  {
-    "objectID": "projects/index.html",
-    "href": "projects/index.html",
-    "title": "Projects",
-    "section": "",
-    "text": "Projects coming soon!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMoral and Partisan Differences in Cancel Culture Discourse\n\n\n\nNLP\n\ntext analytics\n\nmeasurement validation\n\nPython\n\nR\n\nHPC\n\n\n\n\n\n\n\n\n\nJul 22, 2026\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "publications.html",

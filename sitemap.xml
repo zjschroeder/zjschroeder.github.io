@@ -2,30 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://zjschroeder.com/about.html</loc>
-    <lastmod>2026-09-21T21:08:18.168Z</lastmod>
+    <lastmod>2026-09-21T23:24:08.360Z</lastmod>
   </url>
   <url>
     <loc>https://zjschroeder.com/dashboards/index.html</loc>
-    <lastmod>2026-09-21T21:08:18.172Z</lastmod>
+    <lastmod>2026-09-21T23:24:08.388Z</lastmod>
   </url>
   <url>
-    <loc>https://zjschroeder.com/projects/cancel-culture/index.html</loc>
-    <lastmod>2026-09-21T21:08:18.181Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zjschroeder.com/index.html</loc>
-    <lastmod>2026-09-21T21:08:18.172Z</lastmod>
+    <loc>https://zjschroeder.com/projects/conversation-measures/index.html</loc>
+    <lastmod>2026-09-21T23:24:08.399Z</lastmod>
   </url>
   <url>
     <loc>https://zjschroeder.com/projects/index.html</loc>
-    <lastmod>2026-09-21T21:08:18.182Z</lastmod>
+    <lastmod>2026-09-21T23:24:08.399Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zjschroeder.com/index.html</loc>
+    <lastmod>2026-09-21T23:24:08.388Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zjschroeder.com/projects/cancel-culture/index.html</loc>
+    <lastmod>2026-09-21T23:24:08.398Z</lastmod>
   </url>
   <url>
     <loc>https://zjschroeder.com/publications.html</loc>
-    <lastmod>2026-09-21T21:08:18.182Z</lastmod>
+    <lastmod>2026-09-21T23:24:08.399Z</lastmod>
   </url>
   <url>
     <loc>https://zjschroeder.com/blog/index.html</loc>
-    <lastmod>2026-09-21T21:08:18.172Z</lastmod>
+    <lastmod>2026-09-21T23:24:08.388Z</lastmod>
   </url>
 </urlset>
