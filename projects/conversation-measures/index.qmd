@@ -1,0 +1,139 @@
+---
+title: "Which parts of a conversation carry the signal? Building and validating a text pipeline on 74 hours of recorded talk"
+description: "Six old datasets, one measurement pipeline, every automated step checked against human coders. The last thing said predicts what a speaker was thinking; who said it does not."
+date: 2026-04-10
+date-modified: 2026-09-22
+image: figures/hero.png
+categories: [NLP, Bayesian modeling, meta-analysis, measurement validation, R, Python, Observable]
+format:
+  html:
+    toc: true
+    toc-depth: 2
+---
+
+:::: brief
+**In brief.** I had six studies, collected over ten years by different people with different designs, in which observers watched recorded conversations and wrote down what they thought a speaker was thinking. The speakers had written down what they were thinking too. The job was to find out which parts of the conversation predicted each. I transcribed 74 hours of video, split it into utterances, labeled each one, scored how closely it matched each written guess and each written thought, and modeled that score over the course of the conversation. Two results held across all six studies. What was said most recently predicts both the guess and the truth. Which person said it makes no difference.
+
+::: tags
+<span>74 hours of audio</span><span>6 studies</span><span>1,346 observers</span><span>11,906 written guesses</span><span>Whisper</span><span>sentence embeddings</span><span>transformer ensemble</span><span>Bayesian GP</span><span>brms / Stan</span><span>meta-analysis</span>
+:::
+::::
+
+```{ojs}
+//| echo: false
+traj = FileAttachment("data/trajectories.csv").csv({typed: true})
+viewof side = Inputs.radio(new Map([["what observers guessed", "perceiver"], ["what speakers said they were thinking", "target"]]), {label: "Compare speech with", value: "perceiver"})
+viewof overlay = Inputs.toggle({label: "Show each study", value: true})
+```
+
+```{ojs}
+//| echo: false
+pooled = traj.filter(d => d.side === side && d.level === "pooled")
+studiesSel = traj.filter(d => d.side === side && d.level === "study")
+speakerColor = ({domain: ["Target", "Interactant"], range: ["#123F36", "#C49A45"]})
+speakerName = new Map([["Target", "the speaker being judged"], ["Interactant", "their conversation partner"]])
+Plot.plot({
+  width: 720, height: 360, marginLeft: 55, marginRight: 20,
+  x: {label: "Position in the conversation segment →", domain: [0, 1], tickFormat: d => d === 0 ? "start" : d === 1 ? "end" : d},
+  y: {label: "↑ Similarity between speech and " + (side === "perceiver" ? "the observer's guess" : "the speaker's thought"), grid: true, domain: [0, 0.3]},
+  color: {...speakerColor, legend: true, tickFormat: d => "Words spoken by " + speakerName.get(d)},
+  marks: [
+    overlay ? Plot.line(studiesSel, {x: "time", y: "mean", z: d => d.study + d.speaker, stroke: "speaker", strokeOpacity: 0.3, strokeWidth: 1.2, tip: true, title: d => `${d.study} (${d.paradigm})\nwords by ${speakerName.get(d.speaker)}\nsimilarity ${d.mean.toFixed(3)} at ${Math.round(d.time * 100)}% of segment`}) : null,
+    Plot.areaY(pooled, {x: "time", y1: "lower", y2: "upper", fill: "speaker", fillOpacity: 0.15}),
+    Plot.line(pooled, {x: "time", y: "mean", stroke: "speaker", strokeWidth: 3, tip: true, title: d => `All studies pooled\nwords by ${speakerName.get(d.speaker)}\nsimilarity ${d.mean.toFixed(3)} (90% interval ${d.lower.toFixed(3)} to ${d.upper.toFixed(3)})\nat ${Math.round(d.time * 100)}% of segment`})
+  ]
+})
+```
+
+::: {.figure-caption}
+Each conversation was paused every few minutes so the observer could write a guess (and the speaker a thought). The x-axis runs from the start of one of those segments to the pause. The y-axis is how closely an utterance spoken at that point matched what was written down at the pause, averaged over every observer and speaker. Green is the person being judged; gold is their conversation partner. Heavy lines pool all six studies, with a 90% band; faint lines are the individual studies. Two things to read off it: the lines climb toward the pause, and the two colors sit on top of each other. Switch the comparison to the speakers' own thoughts and both hold.
+:::
+
+## The problem
+
+Earlier studies asked whether words mattered by muting the audio and checking whether accuracy dropped. It did. Nobody had asked which words, said when, by whom. The same question shows up in industry under other names: which part of a support call predicts the CSAT score, which minutes of a sales call predict the close, which turns of a user interview a summary should keep. Answering it takes a pipeline that turns recorded talk into a measurement, and a way to know how far to trust each step.
+
+## The data
+
+::: {.callout-note}
+Six studies, 2012 to 2022. 74 hours of video, 1,346 observers, 956 speakers, 11,906 written guesses, between 3,300 and 68,300 utterances per study. Two studies were interview-style (many observers judging a few recorded speakers); four were live two-person conversations where each person later judged the other. Transcripts and written responses are IRB-restricted and stay in the lab. This page shows model summaries only. The code runs end to end on simulated data with the same structure.
+:::
+
+## What I built
+
+**Transcription and segmentation.** Whisper transcribed the video; research assistants corrected it and tagged speakers. Splitting speaker turns into single utterances is the step most people skip, so I hand-coded 5,000 utterances, fine-tuned a segmentation model on them, and tested it on 500 held-out utterances: 96.8% agreement on boundaries.
+
+**Labeling what each utterance does.** Each utterance was tagged as a question, a statement, a suggestion, an agreement, and so on, using four transformer models (DeepPavlov, RoBERTa, ConvBERT, DeBERTa) with a weighted vote that favors agreement among models over one model's confidence. On 1,000 held-out utterances the vote scored 93.4%. Published single-model results on this task run from 85.8% to 91.6%.
+
+**Scoring similarity.** Every utterance, every written guess, and every written thought became a sentence embedding (all-MiniLM-L6-v2). The outcome is the cosine similarity between an utterance and the guess or thought it was paired with. Small numbers, but consistent ones: study averages run from 0.11 to 0.18, with individual pairs ranging from about −0.2 to 0.9.
+
+**Modeling the shape over time.** How similarity changes across a conversation was fit with Bayesian Gaussian process models (brms and Stan, Matérn 3/2 kernel), which let the curve take whatever shape the data support instead of a line or a quadratic picked in advance. Each study was fit separately, then the curves were pooled with a random-effects meta-analysis that reports how much the studies disagree at every point. Six alternative prior settings and a smoother kernel were run on every model. The reasonable priors moved estimates by under 10%. The smoother kernel would not fit, and that is reported too.
+
+| Step | Check | Result |
+|:--|:--|--:|
+| Utterance segmentation | 500 held-out utterances vs hand coding | 96.8% |
+| Utterance-type labels | 1,000 held-out utterances vs hand coding | 93.4% |
+| Prior sensitivity | 6 alternative prior sets, all models | < 10% change |
+| Convergence | Rhat and effective sample size, every model | 1 study excluded |
+
+: {.table-sm}
+
+## What came out
+
+**The most recent words carry the signal.** Similarity rises toward the end of the segment whether the comparison is with the observer's guess or with the speaker's own report. That second part is what makes the first part useful. If observers simply echoed the last thing said, the trend would show up on their side only. It shows up on both, so the end of a segment holds the information and observers are reading it.
+
+**Who said it does not matter.** The speaker's own words were no closer to the guess, or to the thought, than the partner's words. This held in every live-conversation study and at every point in the segment. A null on both sides is worth having. It means a model of what someone is thinking should read the whole exchange, not just their turns.
+
+**Suggestions are the exception, and observers only half catch it.** When the type of each utterance is added to the model, one type stands out. Suggestions (advice, recommendations, proposals) were the utterances closest to what speakers reported thinking, with strong evidence for both speakers. For observers' guesses the point estimate lands in the same place but the evidence does not hold up: the interval reaches zero, and suggestions were rare enough in the recordings that the estimate rests on a few hundred utterances.
+
+```{ojs}
+//| echo: false
+da = FileAttachment("data/dialogue_act_pooled.csv").csv({typed: true})
+actOrder = ["suggestion", "question", "inform", "functional", "disagreement", "agreement", "acknowledgment"]
+actLabel = new Map([["suggestion", "Suggestion"], ["question", "Question"], ["inform", "Statement"], ["functional", "Functional"], ["disagreement", "Disagreement"], ["agreement", "Agreement"], ["acknowledgment", "Acknowledgment"]])
+sideLabel = new Map([["perceiver", "vs what observers guessed"], ["target", "vs what speakers were thinking"]])
+// pool the two speakers (inverse-variance), then express each type as its distance from the average of the other six
+daPooled = d3.groups(da, d => d.side, d => d.dialogue_act).flatMap(([side, acts]) => {
+  const rows = acts.map(([act, g]) => {
+    const w = g.map(d => 1 / Math.pow((d.upper - d.lower) / 3.92, 2));
+    const m = d3.sum(g.map((d, i) => d.mean * w[i])) / d3.sum(w);
+    return {side, act, m, se: Math.sqrt(1 / d3.sum(w))};
+  });
+  return rows.map(r => {
+    const others = rows.filter(o => o.act !== r.act);
+    const base = d3.mean(others, o => o.m);
+    return {side: sideLabel.get(side), act: actLabel.get(r.act), dev: r.m - base, lo: r.m - base - 1.96 * r.se, hi: r.m - base + 1.96 * r.se, m: r.m, base};
+  });
+})
+Plot.plot({
+  width: 720, height: 300, marginLeft: 105, marginRight: 20,
+  y: {label: null, domain: actOrder.map(a => actLabel.get(a))},
+  x: {label: "Similarity, relative to the average of the other six utterance types →", domain: [-0.06, 0.08], grid: true, tickFormat: d => (d > 0 ? "+" : "") + d.toFixed(2)},
+  color: {domain: ["vs what observers guessed", "vs what speakers were thinking"], range: ["#8a8f98", "#123F36"], legend: true},
+  marks: [
+    Plot.ruleX([0], {stroke: "#374151"}),
+    ...["vs what observers guessed", "vs what speakers were thinking"].map((sd, k) => Plot.ruleY(daPooled.filter(d => d.side === sd), {y: "act", x1: "lo", x2: "hi", stroke: "side", strokeWidth: 2, dy: k === 0 ? -5 : 5})),
+    ...["vs what observers guessed", "vs what speakers were thinking"].map((sd, k) => Plot.dot(daPooled.filter(d => d.side === sd), {y: "act", x: "dev", fill: "side", r: 4.5, dy: k === 0 ? -5 : 5, tip: true, title: d => `${d.act}, ${d.side}\n${d.dev >= 0 ? "+" : ""}${d.dev.toFixed(3)} relative to the other types (95% interval ${d.lo.toFixed(3)} to ${d.hi.toFixed(3)})\npooled mean ${d.m.toFixed(3)}, other types average ${d.base.toFixed(3)}`}))
+  ]
+})
+```
+
+::: {.figure-caption}
+How much each utterance type stands out from the rest, on each side of the comparison. Zero is the average of the other six types; a point to the right means that type matched more closely than the others did. Both speakers are pooled, since who spoke made no difference. Suggestions are the only type whose interval clears zero on the speakers' side (green). On the observers' side (grey) the point is in the same place but the interval reaches back to zero, and it rests on only 801 suggestion utterances across four studies, so the evidence there is thin. Intervals reflect each type's own uncertainty.
+:::
+
+## What this is good for
+
+The pipeline is the product. It takes recorded conversation from any source, produces a validated utterance-level dataset with type labels, and fits a time-varying model with the uncertainty attached. The same code would run on call-center audio, sales calls, or interview recordings with the transcripts swapped in.
+
+Two lessons carry over. Publish the holdout number next to every automated label; a 93% label and a 70% label should not enter a model the same way. And plan cluster sizes before collecting. These hierarchical models needed roughly 40 speakers per study to converge, ten times what this field usually records, and the study with 9 speakers had to be dropped from half the analyses. Sessions within users and calls within agents have the same constraint.
+
+## Limits
+
+Similarity is not attention. The data show that guesses resemble recent speech; whether observers are consciously using it is an inference. The two interview-style studies had too few speakers to model on the speaker side, so the design differences visible in the first figure are mapped on the observer side only. The utterance types are broad; a finer scheme might sharpen or dissolve the suggestion result. If I ran this again I would fix the number of speakers per study before anything else, because that decided which questions could be asked at all.
+
+## Links
+
+- Dissertation: [Utilizing Coordinated Data Analysis to Examine Structural, Linguistic, and Discursive Predictors of Thought-Feeling Inferences in Inferential Accuracy Research](../../assets/Dissertation.pdf), University of Oregon, 2026
+- Data behind the figures: [model summaries in the site repository](https://github.com/zjschroeder/zjschroeder.github.io/tree/main/projects/conversation-measures/data)
+- Supported by a National Science Foundation Graduate Research Fellowship (2236419)
