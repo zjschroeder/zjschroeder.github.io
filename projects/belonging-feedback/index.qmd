@@ -1,0 +1,95 @@
+---
+title: "Same sentence, different reader: how students interpret ambiguous feedback"
+description: "Three studies (N = 1,125), including a preregistered replication with its success criteria set in advance. Men read the same ambiguous comment more positively in every study; social belonging mattered in two of three."
+date: 2025-01-15
+date-modified: 2026-09-23
+image: figures/hero.png
+categories: [experiment design, preregistration, survey design, qualitative coding, Qualtrics, R]
+format:
+  html:
+    toc: true
+    toc-depth: 2
+---
+
+:::: brief
+**In brief.** A professor tells a student, *"This is a difficult major, many students do not persevere and instead drop out to study something easier."* Is that a warning or a vote of confidence? I ran three online studies (N = 1,125) in which students imagined hearing exactly that in office hours, then rated it, wrote about it, and picked next term's classes. Men read the comment more positively than women in all three studies, including a preregistered replication that fixed its criteria for success before any data came in. Students who felt they belonged socially in their major read it more positively in two of the three. And students who read it more positively leaned toward the harder, more rewarding class.
+
+::: tags
+<span>N = 1,125</span><span>3 studies</span><span>preregistered replication</span><span>power analysis</span><span>open-text coding</span><span>3 trained coders</span><span>Qualtrics</span><span>R</span>
+:::
+::::
+
+## The problem
+
+Research recommends feedback that is specific and actionable. Much of what people actually hear is a passing remark, and the reader fills in the meaning. Earlier work had found that men and women read explicitly negative feedback differently; almost nobody had tested the murky middle, which is where most real feedback lives. The same question comes up whenever an organization speaks to people in a sentence that could go either way: a status that reads "under review," an error message, a policy notice.
+
+## What I did
+
+**Study 1, exploratory (n = 423).** Participants read the scenario and rated the comment on four items (how positive it was, how confident the professor seemed in them, how they felt afterward, and whether they would go back for more feedback; α = .89). They then chose between a difficult-but-fulfilling class and two easy ones, and completed scales for social belonging (feeling part of the major's community) and intellectual belonging (confidence in their own ability). I fit a sequence of models and used what held up to write the hypotheses for Study 2.
+
+**Study 2, preregistered direct replication (n = 233).** Same materials. Before collecting data I preregistered the hypotheses, a power analysis (at least 200 participants for .80 power), the exclusion rules, and what would count as success: each estimate had to land within one standard error of Study 1's, and the model's R² between .03 and .10.
+
+**Study 3, preregistered extension (n = 469).** Added what the first two could not answer. Participants reported their imagined grade and their percentile standing in the major, rated each class option separately, and wrote about the conversation in their own words: a paragraph describing it, plus three words for how they would feel. Three research assistants coded every paragraph for how the writer saw themselves, the professor, and the interaction (inter-rater α = .76 to .88), and a sentiment dictionary scored the three-word answers.
+
+All three studies ran in Qualtrics through the university participant pool under IRB approval.
+
+## What came out
+
+```{ojs}
+//| echo: false
+rep = FileAttachment("data/replication.csv").csv({typed: true})
+bands = rep.filter(d => d.study === "Study 1")
+Plot.plot({
+  width: 720, height: 280, marginLeft: 70, marginRight: 20, marginTop: 30, marginBottom: 50,
+  fx: {label: null, padding: 0.12},
+  x: {label: "Estimated effect on how positively the comment was rated →", domain: [-0.1, 0.75], grid: true, ticks: [0, 0.2, 0.4, 0.6]},
+  y: {label: null, domain: ["Study 1", "Study 2", "Study 3"]},
+  marks: [
+    Plot.rect(bands, {fx: "predictor", x1: "range_lower", x2: "range_upper", fill: "#C49A45", fillOpacity: 0.28}),
+    Plot.ruleX([0], {stroke: "#374151"}),
+    Plot.ruleY(rep, {fx: "predictor", y: "study", x1: "lower", x2: "upper", stroke: "#123F36", strokeWidth: 2.5}),
+    Plot.dot(rep, {fx: "predictor", y: "study", x: "estimate", r: 6, stroke: "#123F36", strokeWidth: 2,
+      fill: d => d.estimate >= d.range_lower && d.estimate <= d.range_upper ? "#123F36" : "#F3ECDD",
+      tip: true,
+      title: d => `${d.predictor}, ${d.study} (${d.role})\nestimate ${d.estimate.toFixed(2)}, 95% CI ${d.lower.toFixed(2)} to ${d.upper.toFixed(2)}\nsuccess range ${d.range_lower.toFixed(2)} to ${d.range_upper.toFixed(2)}: ${d.estimate >= d.range_lower && d.estimate <= d.range_upper ? "inside" : "outside"}`})
+  ]
+})
+```
+
+::: figure-caption
+Each dot is one study's estimate with its 95% interval. The gold band is the success range set from Study 1 and written into the preregistration before Studies 2 and 3 were run. A filled dot landed inside it; an open dot did not. Left: how much more positively men rated the comment than women, on a 1 to 5 scale. Right: the change in rating for each point of social belonging. Hover for the numbers.
+:::
+
+**Gender replicated cleanly.** Men rated the comment more positively than women in every study, by about 0.4 points on a five-point scale (average ratings of 2.09 to 2.60 for women and 2.52 to 3.04 for men), and all three estimates landed inside the preregistered range. The gap held after controlling for academic standing and for major (STEM, psychology, or other), which rules out the simplest explanation, that men just believed they were doing better.
+
+**Belonging replicated once, then fell short.** Social belonging predicted a more positive reading in Studies 1 and 2, and Study 2's estimate landed inside its range. In Study 3 the effect pointed the same way but was too small to meet the criterion. Study 3 ran in fall 2020, for many participants a first term spent entirely online, which may have changed what belonging to a major even meant. Intellectual belonging never predicted how the comment was read, although men reported more of it.
+
+**The open-text answers told the same story, with more detail.** In their paragraphs, men described themselves and the interaction more positively than women did, and in their three-word answers they used fewer negative words for how they would feel. They did not describe the professor any differently. The difference sat in how readers saw themselves, not in how they judged the speaker, and a single rating could not have shown that.
+
+| Study 3, open-ended measure | Women | Men | Difference |
+|:--|--:|--:|:--|
+| Paragraph: how they saw themselves (1 to 3) | 1.92 | 2.05 | men more positive, *p* = .017 |
+| Paragraph: how they saw the interaction (1 to 3) | 1.68 | 1.82 | men more positive, *p* = .023 |
+| Paragraph: how they saw the professor (1 to 3) | 1.79 | 1.88 | no reliable difference, *p* = .10 |
+| Negative words for how they would feel (0 to 3) | 1.15 | 0.92 | men fewer, *p* < .05 |
+
+: {.table-sm}
+
+**The reading predicted the choice.** Students who read the comment more positively leaned toward the difficult-but-fulfilling class, controlling for gender, in Studies 1 and 3 (Study 2 pointed the same way but was not significant). In Study 3, part of the gender gap in class choice ran through how the comment was read (indirect effect *b* = 0.07, 95% CI 0.02 to 0.14).
+
+## What this is good for
+
+When wording is ambiguous, readers supply the meaning, and different groups of readers supply it differently and predictably. For anyone who writes the sentences people see in a portal, a letter, or an app, that means a message has to be tested on the people who will read it; the team that wrote it already knows what it was supposed to say. Pairing a quick rating with a short open-text prompt is cheap, and here it showed where the difference lived, which the rating alone could not.
+
+The process carries over as well. Deciding before the data arrive what result would count as success (the sample size, the exclusions, the range of effects) is the same discipline a product team needs before reading an A/B test.
+
+## Limits
+
+One scenario, one sentence, and hypothetical class choices. There was no objective measure of ability, so I cannot say whether men over-read the comment or women under-read it. Participants were mostly first- and second-year students from a psychology subject pool, about 70% women; non-binary participants were too few to analyze separately and were excluded.
+
+## Links
+
+- Schroeder, Z. J., & Hodges, S. D. (2025). Gender and social belonging predict evaluation of ambiguous academic feedback. *Social Psychology of Education, 28*(1), 91. [doi:10.1007/s11218-024-10003-7](https://doi.org/10.1007/s11218-024-10003-7)
+- Data, materials, and analysis code: [osf.io/wahsv](https://osf.io/wahsv)
+- Data behind the figure: [estimates in the site repository](https://github.com/zjschroeder/zjschroeder.github.io/tree/main/projects/belonging-feedback/data)
+- Supported by a National Science Foundation Graduate Research Fellowship (2236419)

@@ -1,6 +1,6 @@
 ---
-title: "Which parts of a conversation carry the signal? Building and validating a text pipeline on 74 hours of recorded talk"
-description: "Six old datasets, one measurement pipeline, every automated step checked against human coders. The last thing said predicts what a speaker was thinking; who said it does not."
+title: "Which parts of a conversation reveal what someone is thinking?"
+description: "Six studies, 20 years of recorded conversation, one text pipeline with every automated step checked against human coding. Suggestions tracked what speakers were thinking better than questions did, and the most recent words carried the most signal."
 date: 2026-04-10
 date-modified: 2026-09-22
 image: figures/hero.png
@@ -12,10 +12,10 @@ format:
 ---
 
 :::: brief
-**In brief.** I had six studies, collected over ten years by different people with different designs, in which observers watched recorded conversations and wrote down what they thought a speaker was thinking. The speakers had written down what they were thinking too. The job was to find out which parts of the conversation predicted each. I transcribed 74 hours of video, split it into utterances, labeled each one, scored how closely it matched each written guess and each written thought, and modeled that score over the course of the conversation. Two results held across all six studies. What was said most recently predicts both the guess and the truth. Which person said it makes no difference.
+**In brief.** I had six studies, recorded over roughly 20 years by different research teams with different designs, in which observers watched recorded conversations and wrote down what they thought a speaker was thinking. The speakers had written down what they were thinking too. The job was to find out which parts of the conversation predicted each. I transcribed 74 hours of video, split it into utterances, labeled each one, scored how closely it matched each written guess and each written thought, and modeled that score over the course of the conversation. The clearest single result: suggestions (advice, recommendations, proposals) tracked what speakers were actually thinking more closely, on average, than any other kind of utterance, questions included. Two broader patterns held across all six studies. What was said most recently predicts both the guess and the truth. Which person said it makes no difference.
 
 ::: tags
-<span>74 hours of audio</span><span>6 studies</span><span>1,346 observers</span><span>11,906 written guesses</span><span>Whisper</span><span>sentence embeddings</span><span>transformer ensemble</span><span>Bayesian GP</span><span>brms / Stan</span><span>meta-analysis</span>
+<span>20 years of recordings</span><span>74 hours of audio</span><span>6 studies</span><span>1,346 observers</span><span>11,906 written guesses</span><span>Whisper</span><span>sentence embeddings</span><span>transformer ensemble</span><span>Bayesian GP</span><span>brms / Stan</span><span>meta-analysis</span>
 :::
 ::::
 
@@ -51,12 +51,12 @@ Each conversation was paused every few minutes so the observer could write a gue
 
 ## The problem
 
-Earlier studies asked whether words mattered by muting the audio and checking whether accuracy dropped. It did. Nobody had asked which words, said when, by whom. The same question shows up in industry under other names: which part of a support call predicts the CSAT score, which minutes of a sales call predict the close, which turns of a user interview a summary should keep. Answering it takes a pipeline that turns recorded talk into a measurement, and a way to know how far to trust each step.
+Earlier studies asked whether words mattered by muting the audio and checking whether accuracy dropped. It did. Nobody had asked which words, said when, by whom. Work on conversation also treats questions as the move that draws out what someone is thinking (Graesser & Person, 1994), so questions were my best guess for the most revealing utterances. The same question shows up in industry under other names: which part of a support call predicts the CSAT score, which minutes of a sales call predict the close, which turns of a user interview a summary should keep. Answering it takes a pipeline that turns recorded talk into a measurement, and a way to know how far to trust each step.
 
 ## The data
 
 ::: {.callout-note}
-Six studies, 2012 to 2022. 74 hours of video, 1,346 observers, 956 speakers, 11,906 written guesses, between 3,300 and 68,300 utterances per study. Two studies were interview-style (many observers judging a few recorded speakers); four were live two-person conversations where each person later judged the other. Transcripts and written responses are IRB-restricted and stay in the lab. This page shows model summaries only. The code runs end to end on simulated data with the same structure.
+Six studies spanning roughly 20 years of recordings. 74 hours of video, 1,346 observers, 956 speakers, 11,906 written guesses, between 3,300 and 68,300 utterances per study. Two studies were interview-style (many observers judging a few recorded speakers); four were live two-person conversations where each person later judged the other. Transcripts and written responses are IRB-restricted and stay in the lab. This page shows model summaries only. The code runs end to end on simulated data with the same structure.
 :::
 
 ## What I built
@@ -67,7 +67,7 @@ Six studies, 2012 to 2022. 74 hours of video, 1,346 observers, 956 speakers, 11,
 
 **Scoring similarity.** Every utterance, every written guess, and every written thought became a sentence embedding (all-MiniLM-L6-v2). The outcome is the cosine similarity between an utterance and the guess or thought it was paired with. Small numbers, but consistent ones: study averages run from 0.11 to 0.18, with individual pairs ranging from about −0.2 to 0.9.
 
-**Modeling the shape over time.** How similarity changes across a conversation was fit with Bayesian Gaussian process models (brms and Stan, Matérn 3/2 kernel), which let the curve take whatever shape the data support instead of a line or a quadratic picked in advance. Each study was fit separately, then the curves were pooled with a random-effects meta-analysis that reports how much the studies disagree at every point. Six alternative prior settings and a smoother kernel were run on every model. The reasonable priors moved estimates by under 10%. The smoother kernel would not fit, and that is reported too.
+**Modeling the shape over time.** How similarity changes across a conversation was fit with Bayesian Gaussian process models (brms and Stan, Matérn 3/2 kernel), which let the data decide the shape of the curve. Each study was fit separately, then the curves were pooled with a random-effects meta-analysis that reports how much the studies disagree at every point. Six alternative prior settings and a smoother kernel were run on every model. The reasonable priors moved estimates by under 10%. The smoother kernel would not fit, and that is reported too.
 
 | Step | Check | Result |
 |:--|:--|--:|
@@ -80,11 +80,7 @@ Six studies, 2012 to 2022. 74 hours of video, 1,346 observers, 956 speakers, 11,
 
 ## What came out
 
-**The most recent words carry the signal.** Similarity rises toward the end of the segment whether the comparison is with the observer's guess or with the speaker's own report. That second part is what makes the first part useful. If observers simply echoed the last thing said, the trend would show up on their side only. It shows up on both, so the end of a segment holds the information and observers are reading it.
-
-**Who said it does not matter.** The speaker's own words were no closer to the guess, or to the thought, than the partner's words. This held in every live-conversation study and at every point in the segment. A null on both sides is worth having. It means a model of what someone is thinking should read the whole exchange, not just their turns.
-
-**Suggestions are the exception, and observers only half catch it.** When the type of each utterance is added to the model, one type stands out. Suggestions (advice, recommendations, proposals) were the utterances closest to what speakers reported thinking, with strong evidence for both speakers. For observers' guesses the point estimate lands in the same place but the evidence does not hold up: the interval reaches zero, and suggestions were rare enough in the recordings that the estimate rests on a few hundred utterances.
+**Suggestions revealed the most, and observers only half caught it.** When the type of each utterance was added to the model, suggestions (advice, recommendations, proposals) were the utterances closest to what speakers reported thinking (on average closer than questions), with strong evidence for both speakers. For observers' guesses the point estimate lands in the same place but the evidence does not hold up: the interval reaches zero, and suggestions were rare enough in the recordings that the estimate rests on a few hundred utterances.
 
 ```{ojs}
 //| echo: false
@@ -122,9 +118,15 @@ Plot.plot({
 How much each utterance type stands out from the rest, on each side of the comparison. Zero is the average of the other six types; a point to the right means that type matched more closely than the others did. Both speakers are pooled, since who spoke made no difference. Suggestions are the only type whose interval clears zero on the speakers' side (green). On the observers' side (grey) the point is in the same place but the interval reaches back to zero, and it rests on only 801 suggestion utterances across four studies, so the evidence there is thin. Intervals reflect each type's own uncertainty.
 :::
 
+**The most recent words carry the signal.** Similarity rises toward the end of the segment whether the comparison is with the observer's guess or with the speaker's own report. That second part is what makes the first part useful. If observers simply echoed the last thing said, the trend would show up on their side only. It shows up on both, so the end of a segment holds the information and observers are reading it.
+
+**Who said it does not matter.** The speaker's own words were no closer to the guess, or to the thought, than the partner's words. This held in every live-conversation study and at every point in the segment. A null on both sides is worth having. It means a model of what someone is thinking should read the whole exchange, the partner's turns included.
+
 ## What this is good for
 
-The pipeline is the product. It takes recorded conversation from any source, produces a validated utterance-level dataset with type labels, and fits a time-varying model with the uncertainty attached. The same code would run on call-center audio, sales calls, or interview recordings with the transcripts swapped in.
+The pipeline is the product. It takes recorded conversation from any source, produces a validated utterance-level dataset with type labels, and fits a time-varying model with the uncertainty attached. The same code would run on user-interview recordings, support calls, or sales calls with the transcripts swapped in.
+
+For user research, the suggestions result is the practical one. Analysis of an interview tends to center on how people answer the questions they were asked, yet the moments when someone volunteers a proposal ("it would be easier if...") may say more about what they are thinking.
 
 Two lessons carry over. Publish the holdout number next to every automated label; a 93% label and a 70% label should not enter a model the same way. And plan cluster sizes before collecting. These hierarchical models needed roughly 40 speakers per study to converge, ten times what this field usually records, and the study with 9 speakers had to be dropped from half the analyses. Sessions within users and calls within agents have the same constraint.
 
