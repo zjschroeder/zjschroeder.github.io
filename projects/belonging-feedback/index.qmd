@@ -1,6 +1,6 @@
 ---
-title: "Same sentence, different reader: how students interpret ambiguous feedback"
-description: "Three studies (N = 1,125), including a preregistered replication with its success criteria set in advance. Men read the same ambiguous comment more positively in every study; social belonging mattered in two of three."
+title: "Belonging's Role in Interpreting Ambiguous Feedback"
+description: "Three studies (N = 1,125), including a preregistered replication. Men read the same ambiguous comment more positively than women, with social - but not academic - belonging also predicting feedback perception in two of the three studies."
 date: 2025-01-15
 date-modified: 2026-09-23
 image: figures/hero.png
@@ -12,7 +12,7 @@ format:
 ---
 
 :::: brief
-**In brief.** A professor tells a student, *"This is a difficult major, many students do not persevere and instead drop out to study something easier."* Is that a warning or a vote of confidence? I ran three online studies (N = 1,125) in which students imagined hearing exactly that in office hours, then rated it, wrote about it, and picked next term's classes. Men read the comment more positively than women in all three studies, including a preregistered replication that fixed its criteria for success before any data came in. Students who felt they belonged socially in their major read it more positively in two of the three. And students who read it more positively leaned toward the harder, more rewarding class.
+**In brief.** A professor tells a student, *"This is a difficult major, many students do not persevere and instead drop out to study something easier."* Is that a warning or a vote of confidence? I ran three online studies (N = 1,125) in which students imagined hearing exactly that in office hours, then rated it, wrote about it, and used that feedback to pick next semester's classes. Study 1 was exploratory, examining general trends in how students interpret academic feedback. Based on the findings from Study 1, Study 2 preregistered specific success criteria and replicated Study 1's findings. Study 3 then extended the findings to test their robustness. Men read the comment more positively than women in all three studies; students who felt they belonged socially in their major read it more positively in two of the three. And students who read it more positively subsequently reported using the feedback to pursue harder, more rewarding classes.
 
 ::: tags
 <span>N = 1,125</span><span>3 studies</span><span>preregistered replication</span><span>power analysis</span><span>open-text coding</span><span>3 trained coders</span><span>Qualtrics</span><span>R</span>
@@ -21,17 +21,23 @@ format:
 
 ## The problem
 
-Research recommends feedback that is specific and actionable. Much of what people actually hear is a passing remark, and the reader fills in the meaning. Earlier work had found that men and women read explicitly negative feedback differently; almost nobody had tested the murky middle, which is where most real feedback lives. The same question comes up whenever an organization speaks to people in a sentence that could go either way: a status that reads "under review," an error message, a policy notice.
+Research recommends feedback that is specific and actionable. Much of what people actually hear, however, is a passing remark that requires the feedback recipient to fill in their own meaning. Earlier work had found that men and women read explicitly negative feedback differently; however, almost nobody has tested the murky middle of ambiguous feedback, where most real feedback occurs. The same question comes up whenever an organization speaks to people in a sentence that could go either way (e.g. a status that reads "under review," an error message, a policy notice).
 
 ## What I did
 
-**Study 1, exploratory (n = 423).** Participants read the scenario and rated the comment on four items (how positive it was, how confident the professor seemed in them, how they felt afterward, and whether they would go back for more feedback; α = .89). They then chose between a difficult-but-fulfilling class and two easy ones, and completed scales for social belonging (feeling part of the major's community) and intellectual belonging (confidence in their own ability). I fit a sequence of models and used what held up to write the hypotheses for Study 2.
+**Study 1, exploratory (n = 423).** Participants read the scenario and rated the comment on four items (how positive it was, how confident the professor seemed in them, how they felt afterward, and whether they would go back for more feedback). They then chose between a difficult-but-fulfilling class and two easy ones, and completed scales for social belonging (feeling part of the major's community) and intellectual belonging (confidence in their own ability). I used a program of model comparison to identify the clearest relationships between variables, which became the hypotheses for Study 2.
 
-**Study 2, preregistered direct replication (n = 233).** Same materials. Before collecting data I preregistered the hypotheses, a power analysis (at least 200 participants for .80 power), the exclusion rules, and what would count as success: each estimate had to land within one standard error of Study 1's, and the model's R² between .03 and .10.
+**Study 2, preregistered direct replication (n = 233).** Same materials. Before collecting data I preregistered the hypotheses, a power analysis (at least 200 participants for .80 power), the exclusion rules, and what would count as success: each estimate had to land within one standard error of Study 1's, and the model's R² between .03 and .10. All exploratory findings from Study 1 (feedback interpretation differed by gender and social belonging) replicated in this model.
 
-**Study 3, preregistered extension (n = 469).** Added what the first two could not answer. Participants reported their imagined grade and their percentile standing in the major, rated each class option separately, and wrote about the conversation in their own words: a paragraph describing it, plus three words for how they would feel. Three research assistants coded every paragraph for how the writer saw themselves, the professor, and the interaction (inter-rater α = .76 to .88), and a sentiment dictionary scored the three-word answers.
+::: {.callout-tip .plain-box icon=false}
+## In human words: preregistration
 
-All three studies ran in Qualtrics through the university participant pool under IRB approval.
+Preregistration means writing down your predictions, your sample size, and what will count as success before collecting any data, then posting it publicly with a timestamp. It keeps a researcher from moving the goalposts after seeing the results. It is the same reason a product team should decide what counts as a win before an A/B test starts.
+:::
+
+**Study 3, preregistered extension (n = 469).** Expanded on Studies 1 and 2. Participants reported the grade they believed would earn them the ambiguous feedback as well as their real standing in the major. They also wrote about the conversation in their own words. Three research assistants coded every paragraph for how the writer saw themselves, the professor, and the interaction (inter-rater α = .76 to .88), and a sentiment analysis scored the three-word answers for positive and negative emotionality.
+
+All three studies ran in Qualtrics under IRB approval.
 
 ## What came out
 
@@ -60,32 +66,39 @@ Plot.plot({
 Each dot is one study's estimate with its 95% interval. The gold band is the success range set from Study 1 and written into the preregistration before Studies 2 and 3 were run. A filled dot landed inside it; an open dot did not. Left: how much more positively men rated the comment than women, on a 1 to 5 scale. Right: the change in rating for each point of social belonging. Hover for the numbers.
 :::
 
+::: {.callout-tip .plain-box icon=false}
+## In human words: reading this chart
+
+Before running Studies 2 and 3, I wrote down how big each effect had to be to count as a successful repeat of Study 1; that is the gold band. Each dot is what a study actually found, and the line through it is the range of plausible values. For gender, all three dots landed in the band, so the finding held up every time. For social belonging, the third study came in below the band, so that finding is less certain.
+:::
+
 **Gender replicated cleanly.** Men rated the comment more positively than women in every study, by about 0.4 points on a five-point scale (average ratings of 2.09 to 2.60 for women and 2.52 to 3.04 for men), and all three estimates landed inside the preregistered range. The gap held after controlling for academic standing and for major (STEM, psychology, or other), which rules out the simplest explanation, that men just believed they were doing better.
 
-**Belonging replicated once, then fell short.** Social belonging predicted a more positive reading in Studies 1 and 2, and Study 2's estimate landed inside its range. In Study 3 the effect pointed the same way but was too small to meet the criterion. Study 3 ran in fall 2020, for many participants a first term spent entirely online, which may have changed what belonging to a major even meant. Intellectual belonging never predicted how the comment was read, although men reported more of it.
+**Belonging replicated with caveats.** Social belonging predicted a more positive reading in Studies 1 and 2, and Study 2's estimate landed inside its range. In Study 3 the effect pointed the same way but was too small to meet the criterion. Study 3 ran in fall 2020, for many participants a first term spent entirely online, which may have changed what belonging to a major even meant. Intellectual belonging never predicted how the comment was read, although men reported more of it.
 
-**The open-text answers told the same story, with more detail.** In their paragraphs, men described themselves and the interaction more positively than women did, and in their three-word answers they used fewer negative words for how they would feel. They did not describe the professor any differently. The difference sat in how readers saw themselves, not in how they judged the speaker, and a single rating could not have shown that.
+**The open-text answers told a more detailed version of the same story.** In their paragraphs, men described themselves and the interaction more positively than women did, and in their three-word answers they used fewer negative words for how they felt. However, men and women did not describe the professor any differently.
 
 | Study 3, open-ended measure | Women | Men | Difference |
 |:--|--:|--:|:--|
-| Paragraph: how they saw themselves (1 to 3) | 1.92 | 2.05 | men more positive, *p* = .017 |
-| Paragraph: how they saw the interaction (1 to 3) | 1.68 | 1.82 | men more positive, *p* = .023 |
-| Paragraph: how they saw the professor (1 to 3) | 1.79 | 1.88 | no reliable difference, *p* = .10 |
-| Negative words for how they would feel (0 to 3) | 1.15 | 0.92 | men fewer, *p* < .05 |
+| How they saw themselves (1 to 3) | 1.92 | 2.05 | men more positive, *p* = .017 |
+| How they saw the interaction (1 to 3) | 1.68 | 1.82 | men more positive, *p* = .023 |
+| How they saw the professor (1 to 3) | 1.79 | 1.88 | no reliable difference, *p* = .10 |
+| Negative words for how they felt (0 to 3) | 1.15 | 0.92 | men fewer, *p* < .05 |
 
 : {.table-sm}
 
-**The reading predicted the choice.** Students who read the comment more positively leaned toward the difficult-but-fulfilling class, controlling for gender, in Studies 1 and 3 (Study 2 pointed the same way but was not significant). In Study 3, part of the gender gap in class choice ran through how the comment was read (indirect effect *b* = 0.07, 95% CI 0.02 to 0.14).
+**Feedback perception predicted subsequent class choices.** Students who read the comment more positively leaned toward the difficult-but-fulfilling class (controlling for gender), in Studies 1 and 3 (Study 2 pointed the same way but was not significant). In Study 3, part of the gender gap in class choice ran through how the feedback was interpreted (indirect effect *b* = 0.07, 95% CI 0.02 to 0.14).
+
+::: {.callout-tip .plain-box icon=false}
+## In human words: what an "indirect effect" means
+
+Women were less likely than men to say they would take the harder class. Part of the reason ran through the feedback itself: women read the comment more negatively, and students who read it more negatively were less drawn to the harder class. The indirect effect measures how much of the gender gap travels along that path. It is small, but it suggests a single ambiguous sentence can nudge a real decision.
+:::
 
 ## What this is good for
 
-When wording is ambiguous, readers supply the meaning, and different groups of readers supply it differently and predictably. For anyone who writes the sentences people see in a portal, a letter, or an app, that means a message has to be tested on the people who will read it; the team that wrote it already knows what it was supposed to say. Pairing a quick rating with a short open-text prompt is cheap, and here it showed where the difference lived, which the rating alone could not.
+When wording is ambiguous, readers supply the meaning, and different groups of readers supply it differently and predictably. These effects are compounded when feedback is read without vocal tone or other interpersonal cues. For anyone who writes the sentences people see in a portal, a letter, or an app, a message has to be tested on the people who will actually read it.
 
-The process carries over as well. Deciding before the data arrive what result would count as success (the sample size, the exclusions, the range of effects) is the same discipline a product team needs before reading an A/B test.
-
-## Limits
-
-One scenario, one sentence, and hypothetical class choices. There was no objective measure of ability, so I cannot say whether men over-read the comment or women under-read it. Participants were mostly first- and second-year students from a psychology subject pool, about 70% women; non-binary participants were too few to analyze separately and were excluded.
 
 ## Links
 

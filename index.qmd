@@ -24,9 +24,9 @@ listing:
 :::
 
 ::: {.g-col-12 .g-col-md-8}
-**How do we use language to understand one another?**
+**How can we use language as a tool to understand empathy and interpersonal perception online and in person?**
 
-I'm a behavioral scientist and statistician with seven years of experience researching this question. In that time, I've built an analytic pipeline that transcribed and analyzed 20 years of video-recorded conversations to identify the best cues for understanding what someone is thinking; I examined partisanship and outrage in \~8.6 million tweets discussing "cancel culture," including how outrage builds and fades in the weeks after a cancellation; and I ran three survey experiments on how students' gender and sense of belonging shape the way they read ambiguous feedback.
+I'm a behavioral scientist and statistician with seven years of experience researching this question. Of my many research projects, some of my favorites include: building an analytic pipeline that transcribed and analyzed 20 years of video-recorded conversations to identify the best cues for understanding what someone is thinking; examining partisanship and outrage in \~8.6 million tweets discussing "cancel culture," including how outrage builds and fades in the weeks after a cancellation; and a three survey experiments on how students' gender and sense of belonging shape the way they read ambiguous feedback.
 
 If I'm not wrangling data at my desk, I'm deep in the woods with my dog.
 :::

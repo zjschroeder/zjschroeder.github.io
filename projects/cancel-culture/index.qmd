@@ -1,9 +1,9 @@
 ---
-title: "Moral and Partisan Differences in Cancel Culture Discourse"
+title: "How Liberals and Conservatives Talk About Cancel Culture"
 date: 2026-07-22
-date-modified: 2026-09-21
+date-modified: 2026-09-23
 image: figures/fig_network_pooled.png
-description: "8.6 million tweets, partisan lean inferred from bios, moral and emotional content scored three ways. The sides frame the same cancellation in different moral vocabularies, and outrage builds in the days after attention peaks."
+description: "8.6 million tweets. Liberal- and conservative-leaning users framed the same cancellations with different moral language, and outrage built in the days after attention peaked."
 categories: [NLP, text analytics, topic modeling, measurement validation, Python, R, HPC]
 format:
   html:
@@ -11,37 +11,41 @@ format:
     toc-depth: 2
 ---
 
-::: brief
-**In brief.** Opinions about cancel culture are everywhere online; data on it are scarce. I collected 8.6 million tweets about cancellations, inferred each author's partisan lean from their bio, and scored every tweet for moral and emotional content with dictionaries and transformer classifiers. The result is the largest behavioral dataset on cancellation talk I have found, and it answers three questions any organization that listens to the public would ask: can you tell who is in a conversation without surveying them, how differently do the sides frame the same event, and how does the tone change as a story unfolds?
+:::: brief
+**In brief.** Everyone has an opinion about cancel culture; very few of those opinions come with data. I collected 8.6 million tweets about cancellations from five samples: the phrase "cancel culture" itself, the "\_\_\_ is over" hashtag trend, and tweets about specific academics, celebrities, and private citizens who were canceled. I estimated each user's political lean from the words in their profile bio, then scored every tweet for moral and emotional language. Two findings stand out. Liberal- and conservative-leaning users discussed the same events in different moral vocabularies. And outrage did not peak when a story broke; it built over the following week or two.
+
+::: tags
+8.6M tweets4M users5 samplespartisan lean from biosmoral languagetopic modelingPythonRHPC
 :::
+::::
 
-![Bio-term semantic network. Node color reflects cosine proximity to the liberal (blue) and conservative (red) poles.](figures/fig_network_pooled.png){.lightbox}
+![Words from profile bios, arranged by how often they appear together. Blue words cluster with openly liberal bios; red words with openly conservative ones.](figures/fig_network_pooled.png){.lightbox}
 
-## Why this matters
+## The question
 
-"Cancel culture" gets invoked in newsrooms, legislatures, and product-policy meetings with total confidence and very little data. Underneath the punditry sit two questions that come up whenever an organization listens to the public: who is talking, and how are different groups framing the same thing? They are the same questions for a canceled celebrity, a product recall, or a nonprofit's campaign. This project treats cancellation as a test case for answering them at scale.
-
-## Data
-
-::: callout-note
-8,572,185 original English-language tweets from 4,035,488 users, collected through the Twitter Academic Research API in late 2022, deduplicated, retweets removed. Platform terms prohibit redistributing tweet or bio text, so no tweet, bio, or account is quoted or identified and every number here is an aggregate; the public figures who were the subjects of cancellations are named. The figures are computed live from small aggregate CSVs in the [site repository](https://github.com/zjschroeder/zjschroeder.github.io/tree/main/projects/cancel-culture/data); analysis code is at [github.com/zjschroeder/Cancel-Culture-Text-Analysis](https://github.com/zjschroeder/Cancel-Culture-Text-Analysis).
-:::
+"Cancel culture" gets invoked with a great deal of confidence and very little data. Underneath the argument are two questions any organization that listens to the public has to answer: who is talking, and how are different groups framing the same thing?
 
 ## What I did
 
-**Partisan lean from a bio.** Following Essig and DellaPosta (2024), 62 explicit partisan terms were split into a liberal and a conservative pole; the 1 to 9% of users with a term from one pole got a categorical lean. Every other bio term was scored by its TF-IDF cosine similarity to each pole, and each user's continuous affiliation score is the weighted mean of their terms. That extends coverage to a third to a half of all users, at a measured cost: the continuous score agrees with the explicit labels at r = .28 to .43, an unsupervised scaling of the same bios recovers the labels at r = .13 to .44, and the partisan partition of the bio network is about as modular (Q = 0.13) as the published benchmark (0.17). Agreement with human coders is the check I have not run yet, so I quote no accuracy.
+**Estimated political lean from profile bios.** A small share of users (1 to 9%) state their politics outright in their bio with terms like "#BlueWave" or "GOP." I used them as anchors, then scored every other bio word by how closely it tracks those anchors across millions of bios. That produced an estimate of lean for a third to a half of all users.
 
-**Moral content by triangulation.** Each tweet was scored with the Moral Foundations Dictionary and its crowd-sourced extension, MoralBERT, Mformer, and TweetNLP's RoBERTa emotion, offense, hate, irony, and sentiment classifiers. The outrage measure is where the dictionary's and the transformer's vice composites agree (r = .28 at the tweet level).
+::: {.callout-tip .plain-box icon="false"}
+## In human words: reading politics from a bio
 
-**Topics.** To see what people were talking about without imposing my own categories, I fit a 10-topic LDA model to the broad "cancel culture" sample (3.9 million tweets), choosing the number of topics by coherence, and compared it against BERTopic (clusters of sentence embeddings) and stLDA-C, a single-topic-per-tweet model built for short texts.
+Picture a bio that reads "dog mom, nurse, #BlueWave." The hashtag gives away her politics. The more interesting part is that "dog mom" and "nurse" now carry a little information too, because thousands of other bios pair those words with liberal or conservative signals. Add up those small signals across a whole bio and you get a rough estimate of lean for people who never mention politics. Rough is the important word: the estimate agrees only modestly with users' stated politics (r = .28 to .43), so it is good for comparing large groups and not for labeling any one person.
+:::
 
-**Event time.** For the 57 academics, celebrities, and civilians with a datable cancellation, I aligned each target's tweets to that target's own peak-volume day and traced the outrage rate for 30 days on either side.
+**Scored moral and emotional language.** I measured moral language with a published dictionary of moral words and checked it against two AI models trained to recognize the same categories. The outrage score is the rate of words about harm, cheating, betrayal, subversion, and degradation. I also ran AI classifiers for anger, sentiment, and irony.
+
+**Found topics and tracked time.** A topic model sorted 3.9 million tweets into 10 themes without any categories supplied by me. For 57 people with a datable cancellation, I lined up their tweets by the day attention peaked and followed the outrage score for a month on either side.
+
+::: callout-note
+8,572,185 English-language tweets from 4,035,488 users, collected in late 2022 through Twitter's research API. Platform terms prohibit sharing tweet or bio text, so everything here is an aggregate. Code: [github.com/zjschroeder/Cancel-Culture-Text-Analysis](https://github.com/zjschroeder/Cancel-Culture-Text-Analysis).
+:::
 
 ## What I found
 
-**Partisanship is legible in nonpolitical self-description.** People who share bio vocabulary about jobs, hobbies, faith, and family generally also share partisan lean closely enough that a usable audience segmentation comes out of profile text alone (with no third-party data). However, because the liberal bio vocabulary is more diffuse, a strict cutoff may reinforce asymmetry in the dataset. For example, in one of the subsamples, using the strictest cutoff keeps 63,500 conservative-sounding users but only 28,600 liberal-sounding ones.
-
-**The two sides bring different moral lenses to the same event.** The heatmap gives the ratio of conservative-leaning to liberal-leaning authors' per-token rate for each moral foundation in each sample. Note: this is on a log scale so a *doubling* and a *halving* are the same distance from center.
+**Liberal and conservative users brought different moral lenses to the same events.** Each cell below compares how often conservative- and liberal-leaning users used one kind of moral language in one sample.
 
 ```{ojs}
 //| echo: false
@@ -67,16 +71,20 @@ Plot.plot({
 ```
 
 ::: figure-caption
-Ratio of conservative-leaning to liberal-leaning authors' per-token rate of each moral foundation, by sample. Red means conservatives use the foundation more; blue means liberals do. Hover for the underlying rates.
+Red means conservative-leaning users used that language more; blue means liberal-leaning users did. Hover for the underlying rates.
 :::
 
-Fairness showed the largest partisan gap of any foundation, but its direction depended on who was being canceled. Conservative-leaning authors used fairness language about twice as often as liberal-leaning ones when the target was an academic (2.14×) and 1.7× as often for civilians, and slightly less often in the other three samples. Cheating language leaned liberal in four of five samples. Betrayal, degradation, and the outrage proxy leaned conservative in nearly every sample, the outrage proxy by 1.07× to 1.17×. Some of this matches what Moral Foundations Theory predicts and some does not (sanctity, expected to run conservative, leaned liberal in four of five samples), which is a reason to read the heatmap one sample at a time.
+::: {.callout-tip .plain-box icon="false"}
+## In human words: reading the heatmap
 
-**The sides talk about different parts of the story.** The topic model recovered themes I could name: free speech and censorship, accountability and consequences, racism and lost jobs, boycotts and party politics, and the history of the term itself, often cast as "the mob." Conservative-leaning authors spent more of their tweets on the history-and-mob topic (13% vs. 10%) and on free speech (17% vs. 15%); liberal-leaning authors spent more on accountability and consequences (8% vs. 6%). The gaps are modest (the largest is d = 0.16). It is the same event, discussed in different vocabularies.
+Each number is a ratio. A 2.00 means conservative-leaning users used that kind of language twice as often as liberal-leaning users; a 0.50 means half as often. So when the person being canceled was an academic, conservatives talked about fairness about twice as much as liberals did. When it was a celebrity, they talked about purity and sanctity about half as much. The colors are scaled so that twice as much and half as much look equally strong.
+:::
 
-**Anger and moral outrage are different measurements.** Tweets by conservative-leaning authors scored slightly higher on the transformer's anger (d = 0.14); tweets by liberal-leaning authors scored slightly higher on negative sentiment (d = 0.14) and irony (d = 0.11). The more useful result is a null: tweet by tweet, the anger score and the moral-outrage measure are essentially uncorrelated (r = −.05 across 8.6 million tweets). A team that picked one of them off the shelf would get a different answer than a team that picked the other.
+Fairness showed the biggest gap, but its direction depended on who was being canceled: conservatives used it far more when the target was an academic or a private citizen, and slightly less in the other samples. Betrayal, degradation, and outrage leaned conservative in nearly every sample.
 
-**Outrage arrives after the attention.**
+**They also talked about different parts of the story.** Conservative-leaning users spent more of their tweets on free speech and on the idea of "the mob"; liberal-leaning users spent more on accountability and consequences. The gaps are a few percentage points, but they point the same way across millions of tweets.
+
+**Outrage built after the attention.**
 
 ```{ojs}
 //| echo: false
@@ -103,16 +111,20 @@ Plot.plot({
 ```
 
 ::: figure-caption
-Each target's tweets were aligned to that target's own peak-volume day (day 0), then pooled by type of target, weighted by volume, and smoothed over seven days. The y-axis is the rate of outrage-proxy words relative to the same group's average in the 30 days before. Civilians are hidden by default; with six targets and few tweets per day away from the peak, their curve is mostly noise.
+Day 0 is the day each person received the most tweets. Higher lines mean more outrage language than in the month before. Civilians are hidden by default because six cases are too few for a stable line.
 :::
 
-The burst of attention comes first; the condemnation builds behind it. For academics, outrage crested about ten days after the peak-volume day at roughly twice its pre-event rate. For celebrities it rose with the burst, peaked within the first week, and dropped back within about ten days. Averaged across targets, outrage ran higher in the month after the peak than in the month before for all three kinds of case (57 targets).
+::: {.callout-tip .plain-box icon="false"}
+## In human words: lining up the timelines
 
-**Outrage did not buy reach across the board.** In the 2023 SPSP analysis (a 1.05-million-tweet subset scored with LIWC-22), anger and impoliteness predicted retweets most strongly for mid-tier "macro-influencer" accounts, more than for celebrities. In the full corpus, the outrage measure and retweet counts are essentially unrelated overall (r = .01 across 1.5 million tweets). Whatever engagement outrage earns appears to depend on who is posting it.
+Every cancellation happened on a different date, so I reset each person's clock: day 0 is the day the most people were tweeting about them. Averaging those reset timelines shows the typical arc. For academics, the first burst of tweets carried little extra outrage; outrage roughly doubled about ten days later. For celebrities, it rose with the burst and faded within about ten days.
+:::
 
-## What this adds to interviews and surveys
+**An anger score is not an outrage score.** An off-the-shelf AI "anger" classifier and the moral-outrage measure were essentially unrelated, tweet by tweet (r = −.05). Which tool a team picks decides what it finds.
 
-People may describe a contested issue differently to a researcher than they do to each other. Interviews and surveys get the considered answer; a corpus like this one gets the unprompted one, from people who were never asked. The same scaffolding would run on open-text feedback (support tickets, portal comments, reviews): infer who is talking from how they describe themselves, compare how each group frames the same event, and watch how the tone shifts in the days after something goes wrong. Until the lean score is checked against human coders, it is best used to decide which questions an interview should ask.
+## What this is good for
+
+Interviews and surveys capture what people say when a researcher asks. A dataset like this captures what they say to each other. The same approach would work on support tickets, portal comments, or reviews: estimate who is talking, compare how each group frames the same event, and watch how the tone shifts in the days after something goes wrong.
 
 ## Links
 

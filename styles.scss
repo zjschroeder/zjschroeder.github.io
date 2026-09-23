@@ -51,3 +51,6 @@ a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .quarto-category { background: #DCE6E1; color: $green-deep; border: none; }
 code { color: #7A5A1E; }
 pre code { color: inherit; }
+.plain-box.callout { border-left-color: $green-mid !important; background: #EEF3EF; }
+.plain-box .callout-header { background: #DCE6E1 !important; }
+.plain-box .callout-title-container { color: $green-deep; font-weight: 600; }
