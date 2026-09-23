@@ -12,7 +12,7 @@ format:
 ---
 
 :::: brief
-**In brief.** When you try to work out what someone is thinking, which of their words should you pay attention to? I combined six studies, recorded over roughly 20 years, in which people watched recorded conversations and wrote down what they thought a speaker was thinking; the speakers had also written down what they were actually thinking. I transcribed 74 hours of video, labeled every utterance (question, suggestion, statement, and so on), and measured how closely each one matched the guesses and the real thoughts. Three results held up. Suggestions matched what speakers were thinking more closely, on average, than any other kind of utterance, questions included. The most recent words carried the most information. And it made no difference whether those words came from the speaker or from their conversation partner.
+**In brief.** When you try to work out what someone is thinking, which of their words should you pay attention to? I combined six studies, recorded over roughly 20 years, in which people watched recorded conversations and wrote down what they thought a speaker was thinking; the speakers had also written down what they were actually thinking. I transcribed 74 hours of video, labeled each unique utterance as a dialogue act (e.g., question, suggestion, statement, and so on), and measured how closely each one matched the guesser's guesses  and the speaker's real thoughts. Three results emerged: Suggestions matched what speakers were thinking more closely, on average, than any other kind of utterance, questions included. The most recent words carried the most information. And it made no difference whether those words came from the speaker or from their conversation partner.
 
 ::: tags
 <span>20 years of recordings</span><span>74 hours of video</span><span>6 studies</span><span>1,346 observers</span><span>11,906 written guesses</span><span>sentence embeddings</span><span>Bayesian models</span><span>Python</span><span>R</span>
@@ -55,16 +55,16 @@ Earlier research showed that people read each other more accurately when they ca
 
 ## What I did
 
-**Turned video into text.** An AI transcription model (Whisper) transcribed the video and research assistants corrected it. I hand-coded 5,000 utterances to train a model that splits speech into single utterances; on utterances it had never seen, it agreed with human coding 96.8% of the time.
+**Turned video into text.** I used a transcription model (Whisper) to transcribe the videos and coached a team of 15 research assistants to review transcriptions for accuracy I then hand-coded 5,000 utterances to train a model that split speech into single utterances; on a holdout sample utterances it had never seen, it agreed with human coding with 96.8% accuracy.
 
-**Labeled every utterance.** Four AI language models voted on whether each utterance was a question, suggestion, statement, agreement, and so on. The combined vote matched human coding 93.4% of the time, better than any published single model on this task.
+**Labeled every utterance.** I used a set of four language models to vote on whether each utterance was a question, suggestion, statement, agreement etc. The combined vote matched human coding 93.4% of the time, better than any published single model on this task.
 
 **Measured how close two sentences are.** Every utterance, guess, and thought was converted into a sentence embedding so I could score how similar any two were in meaning.
 
 ::: {.callout-tip .plain-box icon=false}
-## In human words: how a computer compares two sentences
+## How a computer compares two sentences
 
-A sentence embedding turns a sentence into a long list of numbers that captures its meaning. "I'm nervous about the exam" and "this test is stressing me out" share almost no words, but their lists of numbers end up close together. Comparing two lists gives a similarity score, where higher means closer in meaning. That let me ask, for every single utterance, how close it came to what the speaker was actually thinking.
+A sentence embedding turns a sentence into a long list of numbers that captures its meaning. "I'm nervous about the exam" and "this test is stressing me out" don't share any words, but their lists of numbers end up close together because the underlying meaning is similar. Comparing two using the cosine of the angle between the vector of numbers gives a similarity score ranging from -1 to +1 where higher means closer in meaning. That let me ask, for every single utterance, how close it came to what the speaker was actually thinking.
 :::
 
 **Modeled change over time.** Bayesian models traced how similarity rose and fell over the course of each conversation, one study at a time, and then combined all six studies into a single estimate.
@@ -110,22 +110,22 @@ Plot.plot({
 ```
 
 ::: {.figure-caption}
-How much each type of utterance stands out. Zero is the average of the other six types; points to the right matched more closely. Suggestions are the only type that clearly stands out for what speakers were thinking (green). For observers' guesses (grey), the estimate is similar but less certain.
+How much each type of utterance stands out. Zero is the average of the other six types of utterances; points to the right matched more closely. Suggestions are the only type that clearly stands out for what speakers were thinking (green). For observers' guesses (grey), the estimate is similar but less certain.
 :::
 
 ::: {.callout-tip .plain-box icon=false}
-## In human words: what the lines on each dot mean
+## What the lines on each dot mean
 
-Each line shows the range of values that fit the data. When the whole range sits to the right of zero, as it does for suggestions compared with speakers' thoughts, we can be confident suggestions really stand out. On the observers' side the range stretches back to zero. Observers may have picked up on suggestions, or they may not have; suggestions were rare enough in these recordings that the data cannot tell.
+Each line shows the range of values that fit the data. When the whole range sits to the right of zero, as it does for suggestions compared with speakers' thoughts, we can be confident suggestions really stand out. On the observers' side the range stretches back to zero. Observers may have picked up on suggestions, or they may not have; suggestions were rare enough in these recordings that a clearer inference couldn't be made from the data.
 :::
 
 **The most recent words carried the most information.** Similarity climbed toward each pause for both the guesses and the real thoughts (first figure). Because the climb shows up in the real thoughts too, observers who leaned on the last thing said were drawing on real information.
 
-**Who spoke made no difference.** The partner's words matched the speaker's thoughts just as closely as the speaker's own words did. To understand what someone is thinking, read the whole exchange.
+**Who spoke made no difference.** The partner's words matched the speaker's thoughts just as closely as the speaker's own words did. While it may make intuitive sense to only focus on the target, the conversation partner's speech was just as similar to their reported thoughts.
 
 ## What this is good for
 
-The same pipeline would run on user interviews, support calls, or sales calls. For user research, the suggestions result is the practical one. Analysis usually focuses on how people answer the questions we ask them, yet the moments when someone volunteers a proposal ("it would be easier if...") may say more about what they are thinking.
+The same pipeline can be easily adapted to run on user interviews, support calls, or sales calls. For user research, the suggestions result is also a practical one. Analysis usually focuses on how people answer the questions we ask them. However, there are contexts when someone may volunteers a proposal ("it would be easier if...") outside of an interview that may say more about what they are thinking.
 
 ## Links
 

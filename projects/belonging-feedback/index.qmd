@@ -30,7 +30,7 @@ Research recommends feedback that is specific and actionable. Much of what peopl
 **Study 2, preregistered direct replication (n = 233).** Same materials. Before collecting data I preregistered the hypotheses, a power analysis (at least 200 participants for .80 power), the exclusion rules, and what would count as success: each estimate had to land within one standard error of Study 1's, and the model's R² between .03 and .10. All exploratory findings from Study 1 (feedback interpretation differed by gender and social belonging) replicated in this model.
 
 ::: {.callout-tip .plain-box icon=false}
-## In human words: preregistration
+## Preregistration
 
 Preregistration means writing down your predictions, your sample size, and what will count as success before collecting any data, then posting it publicly with a timestamp. It keeps a researcher from moving the goalposts after seeing the results. It is the same reason a product team should decide what counts as a win before an A/B test starts.
 :::
@@ -67,7 +67,7 @@ Each dot is one study's estimate with its 95% interval. The gold band is the suc
 :::
 
 ::: {.callout-tip .plain-box icon=false}
-## In human words: reading this chart
+## Reading this chart
 
 Before running Studies 2 and 3, I wrote down how big each effect had to be to count as a successful repeat of Study 1; that is the gold band. Each dot is what a study actually found, and the line through it is the range of plausible values. For gender, all three dots landed in the band, so the finding held up every time. For social belonging, the third study came in below the band, so that finding is less certain.
 :::
@@ -90,7 +90,7 @@ Before running Studies 2 and 3, I wrote down how big each effect had to be to co
 **Feedback perception predicted subsequent class choices.** Students who read the comment more positively leaned toward the difficult-but-fulfilling class (controlling for gender), in Studies 1 and 3 (Study 2 pointed the same way but was not significant). In Study 3, part of the gender gap in class choice ran through how the feedback was interpreted (indirect effect *b* = 0.07, 95% CI 0.02 to 0.14).
 
 ::: {.callout-tip .plain-box icon=false}
-## In human words: what an "indirect effect" means
+## What an "indirect effect" means
 
 Women were less likely than men to say they would take the harder class. Part of the reason ran through the feedback itself: women read the comment more negatively, and students who read it more negatively were less drawn to the harder class. The indirect effect measures how much of the gender gap travels along that path. It is small, but it suggests a single ambiguous sentence can nudge a real decision.
 :::

@@ -3,7 +3,7 @@ title: "How Liberals and Conservatives Talk About Cancel Culture"
 date: 2026-07-22
 date-modified: 2026-09-23
 image: figures/fig_network_pooled.png
-description: "8.6 million tweets. Liberal- and conservative-leaning users framed the same cancellations with different moral language, and outrage built in the days after attention peaked."
+description: "8.6 million tweets. Liberal- and conservative-leaning users framed the same cancellations with different moral language, and outrage lingered for weeks after the attention faded."
 categories: [NLP, text analytics, topic modeling, measurement validation, Python, R, HPC]
 format:
   html:
@@ -12,14 +12,80 @@ format:
 ---
 
 :::: brief
-**In brief.** Everyone has an opinion about cancel culture; very few of those opinions come with data. I collected 8.6 million tweets about cancellations from five samples: the phrase "cancel culture" itself, the "\_\_\_ is over" hashtag trend, and tweets about specific academics, celebrities, and private citizens who were canceled. I estimated each user's political lean from the words in their profile bio, then scored every tweet for moral and emotional language. Two findings stand out. Liberal- and conservative-leaning users discussed the same events in different moral vocabularies. And outrage did not peak when a story broke; it built over the following week or two.
+**In brief.** Everyone has an opinion about cancel culture; very few of those opinions come with data. I collected 8.6 million tweets about cancellations from five samples: the phrase "cancel culture" itself, the "\_\_\_ is over" hashtag trend, and tweets about specific academics, celebrities, and private citizens who were canceled. I estimated each user's political lean from the words in their profile bio, then scored every tweet for moral and emotional language. Two findings stand out. Liberal- and conservative-leaning users discussed the same events in different moral vocabularies. And outrage arrived with the first wave of attention, then lingered for weeks after the attention faded.
 
 ::: tags
 8.6M tweets4M users5 samplespartisan lean from biosmoral languagetopic modelingPythonRHPC
 :::
 ::::
 
-![Words from profile bios, arranged by how often they appear together. Blue words cluster with openly liberal bios; red words with openly conservative ones.](figures/fig_network_pooled.png){.lightbox}
+**Which words show up together in profile bios?**
+
+```{ojs}
+//| echo: false
+netNodes = (await FileAttachment("data/bio_network_nodes.csv").csv()).map(d => ({term: d.term, lean: +d.lean, degree: +d.degree, x: +d.x, y: +d.y, pole: d.pole === "true"}))
+netEdges = (await FileAttachment("data/bio_network_edges.csv").csv()).map(d => ({source: d.source, target: d.target, weight: +d.weight}))
+bioNetwork = {
+  const W = Math.min(width, 760), H = Math.round(W * 0.7), pad = 28;
+  const q = (k, p) => d3.quantile(netNodes.map(d => d[k]).sort(d3.ascending), p);
+  const xs = d3.scaleLinear().domain([q("x", 0.02), q("x", 0.98)]).range([pad, W - pad]).clamp(true);
+  const ys = d3.scaleLinear().domain([q("y", 0.02), q("y", 0.98)]).range([H - pad, pad + 10]).clamp(true);
+  const color = d3.scaleDiverging([-0.09, 0, 0.13], d3.interpolateRgbBasis(["#2166AC", "#B8B8B8", "#B2182B"]));
+  const r = d3.scaleSqrt().domain([0, d3.max(netNodes, d => d.degree)]).range([2.5, 11]);
+  const adj = new Map(netNodes.map(d => [d.term, []]));
+  netEdges.forEach(e => { adj.get(e.source).push([e.target, e.weight]); adj.get(e.target).push([e.source, e.weight]); });
+  const topNbrs = t => adj.get(t).slice().sort((a, b) => b[1] - a[1]).map(d => d[0]);
+  const byLean = netNodes.slice().sort((a, b) => Math.abs(b.lean) - Math.abs(a.lean)).slice(0, 18).map(d => d.term);
+  const byDeg = netNodes.slice().sort((a, b) => b.degree - a.degree).slice(0, 8).map(d => d.term);
+  const baseLabels = new Set([...byLean, ...byDeg, "liberal", "conservative"]);
+  const leanText = d => d.pole ? `anchor for bios that name ${d.term} terms outright`
+    : Math.abs(d.lean) < 0.015 ? "near the middle"
+    : `${Math.abs(d.lean) > 0.05 ? "strongly " : ""}leans ${d.lean > 0 ? "conservative" : "liberal"}`;
+
+  const wrap = d3.create("div").style("position", "relative").style("max-width", `${W}px`);
+  wrap.append("div").style("font-size", "13px").style("margin-bottom", "4px").html(
+    `<span style="color:#2166AC">●</span> liberal-leaning &nbsp; <span style="color:#B8B8B8">●</span> in between &nbsp; <span style="color:#B2182B">●</span> conservative-leaning &nbsp; ▲ anchor &nbsp; <span style="opacity:.7">Bigger dots appear with more words.</span>`);
+  const svg = wrap.append("svg").attr("viewBox", [0, 0, W, H]).attr("width", W).attr("height", H)
+    .style("max-width", "100%").style("height", "auto").style("font-family", "Inter, sans-serif");
+  const link = svg.append("g").selectAll("line").data(netEdges).join("line")
+    .attr("x1", e => xs(netNodes.find(n => n.term === e.source).x)).attr("y1", e => ys(netNodes.find(n => n.term === e.source).y))
+    .attr("x2", e => xs(netNodes.find(n => n.term === e.target).x)).attr("y2", e => ys(netNodes.find(n => n.term === e.target).y))
+    .attr("stroke", "#8a8f98").attr("stroke-opacity", 0.07).attr("stroke-width", e => 0.5 + e.weight * 4);
+  const node = svg.append("g").selectAll("path").data(netNodes).join("path")
+    .attr("transform", d => `translate(${xs(d.x)},${ys(d.y)})`)
+    .attr("d", d => d3.symbol(d.pole ? d3.symbolTriangle : d3.symbolCircle, Math.PI * r(d.degree) ** 2 * (d.pole ? 1.6 : 1))())
+    .attr("fill", d => color(d.lean)).style("stroke", "var(--bs-body-bg)").attr("stroke-width", 0.8).style("cursor", "pointer");
+  const label = svg.append("g").selectAll("text").data(netNodes).join("text")
+    .attr("x", d => xs(d.x)).attr("y", d => ys(d.y) - r(d.degree) - 3).attr("text-anchor", "middle")
+    .attr("font-size", d => d.pole ? 12.5 : 10.5).attr("font-weight", d => d.pole ? 700 : 400)
+    .attr("fill", "currentColor").attr("paint-order", "stroke").style("stroke", "var(--bs-body-bg)").attr("stroke-width", 3)
+    .style("pointer-events", "none").text(d => d.term).attr("opacity", d => baseLabels.has(d.term) ? 1 : 0);
+  const tip = wrap.append("div").style("position", "absolute").style("pointer-events", "none").style("opacity", 0)
+    .style("background", "var(--bs-body-bg)").style("border", "1px solid #D9CDB2").style("border-radius", "6px")
+    .style("padding", "6px 9px").style("font-size", "13px").style("line-height", "1.35").style("max-width", "230px")
+    .style("box-shadow", "0 2px 8px rgba(0,0,0,.15)");
+
+  function focus(ev, d) {
+    const nb = topNbrs(d.term), shown = new Set([d.term, ...nb.slice(0, 12)]), all = new Set([d.term, ...nb]);
+    node.attr("opacity", o => all.has(o.term) ? 1 : 0.12);
+    link.attr("stroke-opacity", e => e.source === d.term || e.target === d.term ? 0.45 : 0.015);
+    label.attr("opacity", o => shown.has(o.term) ? 1 : 0);
+    const x = xs(d.x), y = ys(d.y) + 20;
+    tip.style("opacity", 1).style("left", `${Math.min(x + 12, W - 240)}px`).style("top", `${y}px`)
+      .html(`<b>${d.term}</b><br>${leanText(d)}<br>appears alongside ${nb.length} other words<br><span style="opacity:.75">most often: ${nb.slice(0, 5).join(", ")}</span>`);
+  }
+  function reset() {
+    node.attr("opacity", 1); link.attr("stroke-opacity", 0.07);
+    label.attr("opacity", d => baseLabels.has(d.term) ? 1 : 0); tip.style("opacity", 0);
+  }
+  node.on("mouseenter", focus).on("click", focus).on("mouseleave", reset);
+  return wrap.node();
+}
+```
+
+::: figure-caption
+Each dot is a word from users' profile bios; lines connect words that tend to appear in the same bios. Hover over (or tap) a word to see which words it travels with.
+:::
 
 ## The question
 
@@ -27,17 +93,19 @@ format:
 
 ## What I did
 
-**Estimated political lean from profile bios.** A small share of users (1 to 9%) state their politics outright in their bio with terms like "#BlueWave" or "GOP." I used them as anchors, then scored every other bio word by how closely it tracks those anchors across millions of bios. That produced an estimate of lean for a third to a half of all users.
+**Estimated political lean from profile bios.** A small share of users (1 to 9%) state their politics outright in their bio with terms like "#BlueWave" or "GOP." I used them as anchors, then scored every other bio word by how closely it tracks those anchors across the millions of bios. That produced a usable estimate of partisan lean for between a third and a half of all users.
 
 ::: {.callout-tip .plain-box icon="false"}
-## In human words: reading politics from a bio
+## Reading politics from a bio
 
-Picture a bio that reads "dog mom, nurse, #BlueWave." The hashtag gives away her politics. The more interesting part is that "dog mom" and "nurse" now carry a little information too, because thousands of other bios pair those words with liberal or conservative signals. Add up those small signals across a whole bio and you get a rough estimate of lean for people who never mention politics. Rough is the important word: the estimate agrees only modestly with users' stated politics (r = .28 to .43), so it is good for comparing large groups and not for labeling any one person.
+Picture a bio that reads "dog mom, nurse, #BlueWave." The hashtag gives a clear clue to her political leaning. The more interesting part, however, is that "dog mom" and "nurse" now carry a little information too. Over millions of bios, non-political words get associated with clear liberal or conservative signals (or get associated with other words that are associated with clear partisan terms). Add up those small signals across a whole bio and you get a rough estimate of lean for people, even if they never mention politics.
 :::
 
-**Scored moral and emotional language.** I measured moral language with a published dictionary of moral words and checked it against two AI models trained to recognize the same categories. The outrage score is the rate of words about harm, cheating, betrayal, subversion, and degradation. I also ran AI classifiers for anger, sentiment, and irony.
+**Scored moral and emotional language.** I measured moral language with a published dictionary of moral words and checked it against two AI models trained to recognize similar categories. I then built an outrage score from dictionary terms for harm, cheating, betrayal, subversion, and degradation, and ran separate AI classifiers for anger, sentiment, and irony to check it.
 
-**Found topics and tracked time.** A topic model sorted 3.9 million tweets into 10 themes without any categories supplied by me. For 57 people with a datable cancellation, I lined up their tweets by the day attention peaked and followed the outrage score for a month on either side.
+**Tracked time.** For 23 cancellations with a verifiable date for the behavior itself (the tweet, remark, or incident, not the news coverage or a firing), I lined up each person's tweets by that date and followed the outrage score for a month afterward.
+
+**Modeled topics.** Using a variant of latent Dirichlet allocation, I identified different topics that were discussed by the different political groups (e.g., "mob justice").
 
 ::: callout-note
 8,572,185 English-language tweets from 4,035,488 users, collected in late 2022 through Twitter's research API. Platform terms prohibit sharing tweet or bio text, so everything here is an aggregate. Code: [github.com/zjschroeder/Cancel-Culture-Text-Analysis](https://github.com/zjschroeder/Cancel-Culture-Text-Analysis).
@@ -51,76 +119,98 @@ Picture a bio that reads "dog mom, nurse, #BlueWave." The hashtag gives away her
 //| echo: false
 ml = FileAttachment("data/moral_by_lean.csv").csv({typed: true})
 foundations = ["care", "harm", "fairness", "cheating", "loyalty", "betrayal", "authority", "subversion", "sanctity", "degradation", "outrage_proxy"]
-foundLabel = new Map([["care", "Care"], ["harm", "Harm"], ["fairness", "Fairness"], ["cheating", "Cheating"], ["loyalty", "Loyalty"], ["betrayal", "Betrayal"], ["authority", "Authority"], ["subversion", "Subversion"], ["sanctity", "Sanctity"], ["degradation", "Degradation"], ["outrage_proxy", "Outrage proxy"]])
+foundLabel = new Map([["care", "Care"], ["harm", "Harm"], ["fairness", "Fairness"], ["cheating", "Cheating"], ["loyalty", "Loyalty"], ["betrayal", "Betrayal"], ["authority", "Authority"], ["subversion", "Subversion"], ["sanctity", "Sanctity"], ["degradation", "Degradation"], ["outrage_proxy", "Outrage"]])
 studies = ["Cancel Culture", "Is Over Party", "Academics", "Celebrities", "Civilians"]
+// ratio = conservative rate / liberal rate; log2 so that 2x and 1/2x sit equally far from "same"
 ratio = studies.flatMap(s => {
   const con = ml.find(d => d.study === s && d.lean === "Conservative");
   const lib = ml.find(d => d.study === s && d.lean === "Liberal");
   return foundations.map(f => ({study: s, foundation: foundLabel.get(f), con: con[f], lib: lib[f], log2ratio: Math.log2(con[f] / lib[f])}));
 })
+gapLabel = d => {
+  const r = Math.pow(2, d.log2ratio);
+  if (r > 0.95 && r < 1.05) return "same";
+  return r > 1 ? `${r.toFixed(1)}× con` : `${(1 / r).toFixed(1)}× lib`;
+}
 Plot.plot({
-  width: 720, height: 300, marginLeft: 110, marginBottom: 60,
+  width: 760, height: 310, marginLeft: 110, marginBottom: 60,
   x: {label: null, domain: foundations.map(f => foundLabel.get(f)), tickRotate: -30},
   y: {label: null, domain: studies},
-  color: {type: "diverging", scheme: "RdBu", reverse: true, domain: [-1, 1], legend: true, width: 360, label: "ratio, conservative / liberal (← liberal higher · conservative higher →)", ticks: [-0.7, 0, 0.7], tickFormat: d => d === 0 ? "equal" : d > 0 ? `${Math.pow(2, d).toFixed(1)}× con` : `${Math.pow(2, -d).toFixed(1)}× lib`},
+  color: {type: "diverging", scheme: "RdBu", reverse: true, domain: [-1.3, 1.3], legend: true, width: 400,
+    label: "Which side used this kind of language more",
+    ticks: [-1, 0, 1],
+    tickFormat: d => d === 0 ? "same" : d > 0 ? `${Math.pow(2, d).toFixed(1)}× con` : `${Math.pow(2, -d).toFixed(1)}× lib`},
   marks: [
-    Plot.cell(ratio, {x: "foundation", y: "study", fill: "log2ratio", inset: 1, tip: true, title: d => `${d.study}, ${d.foundation}\nconservative: ${(d.con * 100).toFixed(2)}% of tokens\nliberal: ${(d.lib * 100).toFixed(2)}% of tokens\nratio: ${Math.pow(2, d.log2ratio).toFixed(2)}`}),
-    Plot.text(ratio, {x: "foundation", y: "study", text: d => Math.pow(2, d.log2ratio).toFixed(2), fill: d => Math.abs(d.log2ratio) > 0.6 ? "white" : "#111", fontSize: 11})
+    Plot.cell(ratio, {x: "foundation", y: "study", fill: "log2ratio", inset: 1, tip: true,
+      title: d => `${d.study}, ${d.foundation}\nconservative-leaning users: ${(d.con * 1000).toFixed(1)} per 1,000 words\nliberal-leaning users: ${(d.lib * 1000).toFixed(1)} per 1,000 words\n${gapLabel(d) === "same" ? "about the same" : gapLabel(d).endsWith("con") ? `conservatives used it ${gapLabel(d).split("×")[0]} times as often` : `liberals used it ${gapLabel(d).split("×")[0]} times as often`}`}),
+    Plot.text(ratio, {x: "foundation", y: "study", text: gapLabel, fill: d => Math.abs(d.log2ratio) > 0.6 ? "white" : "#111", fontSize: 10})
   ]
 })
 ```
 
 ::: figure-caption
-Red means conservative-leaning users used that language more; blue means liberal-leaning users did. Hover for the underlying rates.
+Red cells: conservative-leaning users used that kind of language more. Blue cells: liberal-leaning users did. The label says how many times as often ("2.1× con" means conservatives used it 2.1 times as often as liberals). Hover for the underlying rates.
 :::
 
 ::: {.callout-tip .plain-box icon="false"}
-## In human words: reading the heatmap
+## Reading the heatmap
 
-Each number is a ratio. A 2.00 means conservative-leaning users used that kind of language twice as often as liberal-leaning users; a 0.50 means half as often. So when the person being canceled was an academic, conservatives talked about fairness about twice as much as liberals did. When it was a celebrity, they talked about purity and sanctity about half as much. The colors are scaled so that twice as much and half as much look equally strong.
+Each cell compares one kind of moral language between the two groups. The label tells you which group used it more and by how much: "2.1× con" means conservative-leaning users used it 2.1 times as often as liberal-leaning users, and "2.1× lib" means the reverse. The color says the same thing, red for conservative and blue for liberal, and the deeper the color, the bigger the gap. For example, when academics were canceled, conservatives used fairness language 2.1 times as often as liberals did; when celebrities were canceled, liberals used sanctity (purity) language 2.1 times as often as conservatives did.
 :::
 
-Fairness showed the biggest gap, but its direction depended on who was being canceled: conservatives used it far more when the target was an academic or a private citizen, and slightly less in the other samples. Betrayal, degradation, and outrage leaned conservative in nearly every sample.
+Fairness showed the biggest gap, but its direction depended on who was being canceled: conservatives used it far more when the target was an academic or a private citizen, and slightly less in the other samples. Betrayal, degradation, and outrage leaned conservative in most samples.
 
-**They also talked about different parts of the story.** Conservative-leaning users spent more of their tweets on free speech and on the idea of "the mob"; liberal-leaning users spent more on accountability and consequences. The gaps are a few percentage points, but they point the same way across millions of tweets.
+**They also talked about different parts of the story.** Conservative-leaning users spent more of their tweets on free speech and on the idea of "the mob"; liberal-leaning users spent more on accountability and consequences. Although gaps are a few percentage points, for a dataset of millions of tweets, that marks a sizable difference in conversations.
 
-**Outrage built after the attention.**
+**Outrage arrived with the attention, then lingered.**
 
 ```{ojs}
 //| echo: false
 ev = FileAttachment("data/outrage_event_time.csv").csv({typed: true})
 evTypes = ["Academics", "Celebrities", "Civilians"]
-evBase = new Map(evTypes.map(t => {
-  const pre = ev.filter(d => d.type === t && d.rel < 0);
-  return [t, d3.sum(pre, d => d.outrage * d.n) / d3.sum(pre, d => d.n)];
-}))
-evRel = ev.map(d => ({...d, rel_outrage: d.outrage_7d / evBase.get(d.type)}))
+viewof evWeight = Inputs.radio(new Map([["every tweet counts equally", "by_tweets"], ["every person counts equally", "by_people"]]), {label: "Average so that", value: "by_tweets"})
 viewof evShow = Inputs.checkbox(evTypes, {label: "Show", value: ["Academics", "Celebrities"]})
 Plot.plot({
-  width: 720, height: 340, marginLeft: 55, marginRight: 20,
-  x: {label: "Days from the day of peak tweet volume →", domain: [-30, 30], ticks: [-30, -20, -10, 0, 10, 20, 30]},
-  y: {label: "↑ Outrage rate relative to the month before", grid: true, domain: [0, 2.5], tickFormat: d => d + "×"},
+  width: 720, height: 340, marginLeft: 55, marginRight: 20, marginTop: 30,
+  x: {label: "Days after the behavior became public →", domain: [0, 30], ticks: [0, 5, 10, 15, 20, 25, 30]},
+  y: {label: "↑ Outrage words per 1,000 words (past-7-day average)", grid: true, domain: [0, 22]},
   color: {domain: evTypes, range: ["#123F36", "#C49A45", "#8a8f98"], legend: true},
   marks: [
-    Plot.ruleY([1], {stroke: "#374151", strokeDasharray: "3,3"}),
-    Plot.ruleX([0], {stroke: "#374151"}),
-    Plot.line(evRel.filter(d => evShow.includes(d.type)), {x: "rel", y: "rel_outrage", stroke: "type", strokeWidth: 2.5, curve: "monotone-x", tip: true,
-      title: d => `${d.type}, day ${d.rel > 0 ? "+" : ""}${d.rel}\n7-day outrage rate ${d.outrage_7d.toFixed(1)} per 1,000 words (${d.rel_outrage.toFixed(2)}× the month before)\n${d.n.toLocaleString()} tweets that day`})
+    Plot.line(ev.filter(d => d.rel >= 0 && evShow.includes(d.type) && d[evWeight] != null), {x: "rel", y: evWeight, z: "type", stroke: "type", strokeWidth: 2.5, curve: "monotone-x", tip: true,
+      title: d => `${d.type}, day ${d.rel > 0 ? "+" : ""}${d.rel}\n${d[evWeight].toFixed(1)} outrage words per 1,000 (average of this day and the 6 before it)\n${d.tweets.toLocaleString()} tweets about ${d.people} ${d.people === 1 ? "person" : "people"} that day`})
   ]
 })
 ```
 
 ::: figure-caption
-Day 0 is the day each person received the most tweets. Higher lines mean more outrage language than in the month before. Civilians are hidden by default because six cases are too few for a stable line.
+Day 0 is the date of the behavior itself (the tweet, remark, video, or incident), found by searching news coverage for each of the 23 cases listed below. Each point averages that day and up to six days before it, counting only days from day 0 on. Days before day 0 are left off: most people in the sample were barely tweeted about before their behavior, so those averages rest on a handful of people. The academic jump around day 15 comes mostly from one case whose remarks went viral about two weeks after they aired.
+:::
+
+::: {.callout-note collapse="true"}
+## The 23 cancellations in this figure
+
+```{ojs}
+//| echo: false
+cancelEvents = FileAttachment("data/cancellation_events.csv").csv({typed: false})
+Inputs.table(cancelEvents, {
+  columns: ["type", "person", "event_date", "event", "consequence_date", "consequence", "source"],
+  header: {type: "Group", person: "Person", event_date: "Day 0", event: "What happened", consequence_date: "Later action", consequence: "What the institution did", source: "Source"},
+  format: {source: d => d ? htl.html`<a href=${d} target="_blank">link</a>` : ""},
+  width: {type: 90, person: 130, event_date: 90, consequence_date: 90, source: 50},
+  rows: 14, sort: "event_date"
+})
+```
+
+Day 0 is the date of the behavior itself, not when news covered it or when an employer acted; later actions are listed separately. Dates marked ±1 day in the [data file](https://github.com/zjschroeder/zjschroeder.github.io/tree/main/projects/cancel-culture/data) could only be pinned that closely. Cases were left out when the behavior could not be dated to the day (for example, years-old tweets that resurfaced, or remarks recorded at an unknown time), when the only available date was news coverage or a firing, or when the dataset held fewer than 20 tweets within a month of the behavior.
 :::
 
 ::: {.callout-tip .plain-box icon="false"}
-## In human words: lining up the timelines
+## Lining up the timelines
 
-Every cancellation happened on a different date, so I reset each person's clock: day 0 is the day the most people were tweeting about them. Averaging those reset timelines shows the typical arc. For academics, the first burst of tweets carried little extra outrage; outrage roughly doubled about ten days later. For celebrities, it rose with the burst and faded within about ten days.
+Every cancellation happened on a different date, so I looked up the date of each person's behavior (the tweet, the remark, the incident) and reset their clock: day 0 is that date. Averaging the reset timelines shows the typical arc. For celebrities, outrage jumped from about 3 outrage words per 1,000 in the month before (not shown) to about 10 within two days, as attention peaked, and stayed near that level for the rest of the month even as the number of tweets fell by more than 90%. Civilians held steady at about 8 from the first day. The academic line is less certain because it rests on five to eight people. Its jump around day 15 is mostly one case: Amy Wax's podcast remarks aired on day 0 but were not widely noticed until about two weeks later, a reminder that the behavior and the outrage are not always close together.
 :::
 
-**An anger score is not an outrage score.** An off-the-shelf AI "anger" classifier and the moral-outrage measure were essentially unrelated, tweet by tweet (r = −.05). Which tool a team picks decides what it finds.
+**An anger score is not an outrage score.** An off-the-shelf AI "anger" classifier and the moral-outrage measure were essentially unrelated (r = −.05). As such, building a unique measure of outrage allowed me to specify the type and context of the negative emotionality.
 
 ## What this is good for
 
