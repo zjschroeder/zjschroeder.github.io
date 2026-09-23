@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2026-04-10">
-<meta name="description" content="Six studies, 20 years of recorded conversation, one text pipeline with every automated step checked against human coding. Suggestions tracked what speakers were thinking better than questions did, and the most recent words carried the most signal.">
+<meta name="description" content="Six studies and 20 years of recorded conversations. Suggestions revealed more about what speakers were thinking than questions did, and the most recent words carried the most information.">
 
-<title>Which parts of a conversation reveal what someone is thinking? – Zach Schroeder</title>
+<title>Which Parts of a Conversation Reveal What Someone Is Thinking? – Zach Schroeder</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -79,9 +79,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2d2f9783a766b609b99e8ed7ac4bcbf9.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-f88a3628fd4f9576cf149c5ae4b9672f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-454df44c7a62d22490b95138f05d3b7e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-f88a3628fd4f9576cf149c5ae4b9672f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-11672cb23c702c3e1b098f1b238b693a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-3271d3bf44b77d32842ea0d185e4dc91.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-11672cb23c702c3e1b098f1b238b693a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -115,8 +115,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Which parts of a conversation reveal what someone is thinking? – Zach Schroeder">
-<meta property="og:description" content="Six studies, 20 years of recorded conversation, one text pipeline with every automated step checked against human coding. Suggestions tracked what speakers were thinking better than questions did, and the most recent words carried the most signal.">
+<meta property="og:title" content="Which Parts of a Conversation Reveal What Someone Is Thinking? – Zach Schroeder">
+<meta property="og:description" content="Six studies and 20 years of recorded conversations. Suggestions revealed more about what speakers were thinking than questions did, and the most recent words carried the most information.">
 <meta property="og:image" content="https://zjschroeder.com/projects/conversation-measures/figures/hero.png">
 <meta property="og:site_name" content="Zach Schroeder">
 <meta property="og:image:height" content="722">
@@ -355,12 +355,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#the-problem" id="toc-the-problem" class="nav-link active" data-scroll-target="#the-problem">The problem</a></li>
-  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The data</a></li>
-  <li><a href="#what-i-built" id="toc-what-i-built" class="nav-link" data-scroll-target="#what-i-built">What I built</a></li>
-  <li><a href="#what-came-out" id="toc-what-came-out" class="nav-link" data-scroll-target="#what-came-out">What came out</a></li>
+  <li><a href="#the-question" id="toc-the-question" class="nav-link active" data-scroll-target="#the-question">The question</a></li>
+  <li><a href="#what-i-did" id="toc-what-i-did" class="nav-link" data-scroll-target="#what-i-did">What I did</a></li>
+  <li><a href="#what-i-found" id="toc-what-i-found" class="nav-link" data-scroll-target="#what-i-found">What I found</a></li>
   <li><a href="#what-this-is-good-for" id="toc-what-this-is-good-for" class="nav-link" data-scroll-target="#what-this-is-good-for">What this is good for</a></li>
-  <li><a href="#limits" id="toc-limits" class="nav-link" data-scroll-target="#limits">Limits</a></li>
   <li><a href="#links" id="toc-links" class="nav-link" data-scroll-target="#links">Links</a></li>
   </ul>
 </nav>
@@ -371,7 +369,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Which parts of a conversation reveal what someone is thinking?</h1>
+<h1 class="title">Which Parts of a Conversation Reveal What Someone Is Thinking?</h1>
   <div class="quarto-categories">
     <div class="quarto-category">NLP</div>
     <div class="quarto-category">Bayesian modeling</div>
@@ -385,7 +383,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div>
   <div class="description">
-    Six studies, 20 years of recorded conversation, one text pipeline with every automated step checked against human coding. Suggestions tracked what speakers were thinking better than questions did, and the most recent words carried the most signal.
+    Six studies and 20 years of recorded conversations. Suggestions revealed more about what speakers were thinking than questions did, and the most recent words carried the most information.
   </div>
 </div>
 
@@ -403,7 +401,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">September 22, 2026</p>
+      <p class="date-modified">September 23, 2026</p>
     </div>
   </div>
     
@@ -415,9 +413,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="brief">
-<p><strong>In brief.</strong> I had six studies, recorded over roughly 20 years by different research teams with different designs, in which observers watched recorded conversations and wrote down what they thought a speaker was thinking. The speakers had written down what they were thinking too. The job was to find out which parts of the conversation predicted each. I transcribed 74 hours of video, split it into utterances, labeled each one, scored how closely it matched each written guess and each written thought, and modeled that score over the course of the conversation. The clearest single result: suggestions (advice, recommendations, proposals) tracked what speakers were actually thinking more closely, on average, than any other kind of utterance, questions included. Two broader patterns held across all six studies. What was said most recently predicts both the guess and the truth. Which person said it makes no difference.</p>
+<p><strong>In brief.</strong> When you try to work out what someone is thinking, which of their words should you pay attention to? I combined six studies, recorded over roughly 20 years, in which people watched recorded conversations and wrote down what they thought a speaker was thinking; the speakers had also written down what they were actually thinking. I transcribed 74 hours of video, labeled every utterance (question, suggestion, statement, and so on), and measured how closely each one matched the guesses and the real thoughts. Three results held up. Suggestions matched what speakers were thinking more closely, on average, than any other kind of utterance, questions included. The most recent words carried the most information. And it made no difference whether those words came from the speaker or from their conversation partner.</p>
 <div class="tags">
-<p><span>20 years of recordings</span><span>74 hours of audio</span><span>6 studies</span><span>1,346 observers</span><span>11,906 written guesses</span><span>Whisper</span><span>sentence embeddings</span><span>transformer ensemble</span><span>Bayesian GP</span><span>brms / Stan</span><span>meta-analysis</span></p>
+<p><span>20 years of recordings</span><span>74 hours of video</span><span>6 studies</span><span>1,346 observers</span><span>11,906 written guesses</span><span>sentence embeddings</span><span>Bayesian models</span><span>Python</span><span>R</span></p>
 </div>
 </div>
 <div class="cell">
@@ -499,14 +497,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="figure-caption">
-<p>Each conversation was paused every few minutes so the observer could write a guess (and the speaker a thought). The x-axis runs from the start of one of those segments to the pause. The y-axis is how closely an utterance spoken at that point matched what was written down at the pause, averaged over every observer and speaker. Green is the person being judged; gold is their conversation partner. Heavy lines pool all six studies, with a 90% band; faint lines are the individual studies. Two things to read off it: the lines climb toward the pause, and the two colors sit on top of each other. Switch the comparison to the speakers’ own thoughts and both hold.</p>
+<p>Each conversation was paused every few minutes so observers could write a guess and speakers could write down their actual thought. Left to right runs from the start of a segment to the pause; higher means what was said at that moment more closely matched what was written down. Both lines climb toward the pause, and the green (speaker) and gold (partner) lines sit on top of each other.</p>
 </div>
-<section id="the-problem" class="level2">
-<h2 class="anchored" data-anchor-id="the-problem">The problem</h2>
-<p>Earlier studies asked whether words mattered by muting the audio and checking whether accuracy dropped. It did. Nobody had asked which words, said when, by whom. Work on conversation also treats questions as the move that draws out what someone is thinking (Graesser &amp; Person, 1994), so questions were my best guess for the most revealing utterances. The same question shows up in industry under other names: which part of a support call predicts the CSAT score, which minutes of a sales call predict the close, which turns of a user interview a summary should keep. Answering it takes a pipeline that turns recorded talk into a measurement, and a way to know how far to trust each step.</p>
+<section id="the-question" class="level2">
+<h2 class="anchored" data-anchor-id="the-question">The question</h2>
+<p>Earlier research showed that people read each other more accurately when they can hear what is said. It had not asked which words, said when, and by whom. Research on conversation also treats questions as the best way to draw out what someone is thinking (Graesser &amp; Person, 1994), so I expected questions to be the most revealing.</p>
 </section>
-<section id="the-data" class="level2">
-<h2 class="anchored" data-anchor-id="the-data">The data</h2>
+<section id="what-i-did" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-did">What I did</h2>
+<p><strong>Turned video into text.</strong> An AI transcription model (Whisper) transcribed the video and research assistants corrected it. I hand-coded 5,000 utterances to train a model that splits speech into single utterances; on utterances it had never seen, it agreed with human coding 96.8% of the time.</p>
+<p><strong>Labeled every utterance.</strong> Four AI language models voted on whether each utterance was a question, suggestion, statement, agreement, and so on. The combined vote matched human coding 93.4% of the time, better than any published single model on this task.</p>
+<p><strong>Measured how close two sentences are.</strong> Every utterance, guess, and thought was converted into a sentence embedding so I could score how similar any two were in meaning.</p>
+<div class="plain-box callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+In human words: how a computer compares two sentences
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A sentence embedding turns a sentence into a long list of numbers that captures its meaning. “I’m nervous about the exam” and “this test is stressing me out” share almost no words, but their lists of numbers end up close together. Comparing two lists gives a similarity score, where higher means closer in meaning. That let me ask, for every single utterance, how close it came to what the speaker was actually thinking.</p>
+</div>
+</div>
+<p><strong>Modeled change over time.</strong> Bayesian models traced how similarity rose and fell over the course of each conversation, one study at a time, and then combined all six studies into a single estimate.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -517,85 +532,42 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Six studies spanning roughly 20 years of recordings. 74 hours of video, 1,346 observers, 956 speakers, 11,906 written guesses, between 3,300 and 68,300 utterances per study. Two studies were interview-style (many observers judging a few recorded speakers); four were live two-person conversations where each person later judged the other. Transcripts and written responses are IRB-restricted and stay in the lab. This page shows model summaries only. The code runs end to end on simulated data with the same structure.</p>
+<p>74 hours of video, 1,346 observers, 956 speakers, and 11,906 written guesses. Transcripts are IRB-restricted and stay in the lab; this page shows model summaries only.</p>
 </div>
 </div>
 </section>
-<section id="what-i-built" class="level2">
-<h2 class="anchored" data-anchor-id="what-i-built">What I built</h2>
-<p><strong>Transcription and segmentation.</strong> Whisper transcribed the video; research assistants corrected it and tagged speakers. Splitting speaker turns into single utterances is the step most people skip, so I hand-coded 5,000 utterances, fine-tuned a segmentation model on them, and tested it on 500 held-out utterances: 96.8% agreement on boundaries.</p>
-<p><strong>Labeling what each utterance does.</strong> Each utterance was tagged as a question, a statement, a suggestion, an agreement, and so on, using four transformer models (DeepPavlov, RoBERTa, ConvBERT, DeBERTa) with a weighted vote that favors agreement among models over one model’s confidence. On 1,000 held-out utterances the vote scored 93.4%. Published single-model results on this task run from 85.8% to 91.6%.</p>
-<p><strong>Scoring similarity.</strong> Every utterance, every written guess, and every written thought became a sentence embedding (all-MiniLM-L6-v2). The outcome is the cosine similarity between an utterance and the guess or thought it was paired with. Small numbers, but consistent ones: study averages run from 0.11 to 0.18, with individual pairs ranging from about −0.2 to 0.9.</p>
-<p><strong>Modeling the shape over time.</strong> How similarity changes across a conversation was fit with Bayesian Gaussian process models (brms and Stan, Matérn 3/2 kernel), which let the data decide the shape of the curve. Each study was fit separately, then the curves were pooled with a random-effects meta-analysis that reports how much the studies disagree at every point. Six alternative prior settings and a smoother kernel were run on every model. The reasonable priors moved estimates by under 10%. The smoother kernel would not fit, and that is reported too.</p>
-<table class="table-sm small caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Step</th>
-<th style="text-align: left;">Check</th>
-<th style="text-align: right;">Result</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Utterance segmentation</td>
-<td style="text-align: left;">500 held-out utterances vs hand coding</td>
-<td style="text-align: right;">96.8%</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Utterance-type labels</td>
-<td style="text-align: left;">1,000 held-out utterances vs hand coding</td>
-<td style="text-align: right;">93.4%</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Prior sensitivity</td>
-<td style="text-align: left;">6 alternative prior sets, all models</td>
-<td style="text-align: right;">&lt; 10% change</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Convergence</td>
-<td style="text-align: left;">Rhat and effective sample size, every model</td>
-<td style="text-align: right;">1 study excluded</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="what-came-out" class="level2">
-<h2 class="anchored" data-anchor-id="what-came-out">What came out</h2>
-<p><strong>Suggestions revealed the most, and observers only half caught it.</strong> When the type of each utterance was added to the model, suggestions (advice, recommendations, proposals) were the utterances closest to what speakers reported thinking (on average closer than questions), with strong evidence for both speakers. For observers’ guesses the point estimate lands in the same place but the evidence does not hold up: the interval reaches zero, and suggestions were rare enough in the recordings that the estimate rests on a few hundred utterances.</p>
+<section id="what-i-found" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-found">What I found</h2>
+<p><strong>Suggestions revealed the most.</strong> Suggestions (advice, recommendations, proposals) were, on average, the utterances closest to what speakers were actually thinking, closer than questions. Observers’ guesses pointed the same way, but the evidence there is weaker.</p>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="87" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 86;"><span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>da <span class="op">=</span> <span class="fu">FileAttachment</span>(<span class="st">"data/dialogue_act_pooled.csv"</span>)<span class="op">.</span><span class="fu">csv</span>({<span class="dt">typed</span><span class="op">:</span> <span class="kw">true</span>})</span>
-<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>actOrder <span class="op">=</span> [<span class="st">"suggestion"</span><span class="op">,</span> <span class="st">"question"</span><span class="op">,</span> <span class="st">"inform"</span><span class="op">,</span> <span class="st">"functional"</span><span class="op">,</span> <span class="st">"disagreement"</span><span class="op">,</span> <span class="st">"agreement"</span><span class="op">,</span> <span class="st">"acknowledgment"</span>]</span>
-<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>actLabel <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>([[<span class="st">"suggestion"</span><span class="op">,</span> <span class="st">"Suggestion"</span>]<span class="op">,</span> [<span class="st">"question"</span><span class="op">,</span> <span class="st">"Question"</span>]<span class="op">,</span> [<span class="st">"inform"</span><span class="op">,</span> <span class="st">"Statement"</span>]<span class="op">,</span> [<span class="st">"functional"</span><span class="op">,</span> <span class="st">"Functional"</span>]<span class="op">,</span> [<span class="st">"disagreement"</span><span class="op">,</span> <span class="st">"Disagreement"</span>]<span class="op">,</span> [<span class="st">"agreement"</span><span class="op">,</span> <span class="st">"Agreement"</span>]<span class="op">,</span> [<span class="st">"acknowledgment"</span><span class="op">,</span> <span class="st">"Acknowledgment"</span>]])</span>
-<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>sideLabel <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>([[<span class="st">"perceiver"</span><span class="op">,</span> <span class="st">"vs what observers guessed"</span>]<span class="op">,</span> [<span class="st">"target"</span><span class="op">,</span> <span class="st">"vs what speakers were thinking"</span>]])</span>
-<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a><span class="co">// pool the two speakers (inverse-variance), then express each type as its distance from the average of the other six</span></span>
-<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>daPooled <span class="op">=</span> d3<span class="op">.</span><span class="fu">groups</span>(da<span class="op">,</span> d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">side</span><span class="op">,</span> d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">dialogue_act</span>)<span class="op">.</span><span class="fu">flatMap</span>(([side<span class="op">,</span> acts]) <span class="kw">=&gt;</span> {</span>
-<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> rows <span class="op">=</span> acts<span class="op">.</span><span class="fu">map</span>(([act<span class="op">,</span> g]) <span class="kw">=&gt;</span> {</span>
-<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> w <span class="op">=</span> g<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> <span class="dv">1</span> <span class="op">/</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">pow</span>((d<span class="op">.</span><span class="at">upper</span> <span class="op">-</span> d<span class="op">.</span><span class="at">lower</span>) <span class="op">/</span> <span class="fl">3.92</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span></span>
-<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> m <span class="op">=</span> d3<span class="op">.</span><span class="fu">sum</span>(g<span class="op">.</span><span class="fu">map</span>((d<span class="op">,</span> i) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">mean</span> <span class="op">*</span> w[i])) <span class="op">/</span> d3<span class="op">.</span><span class="fu">sum</span>(w)<span class="op">;</span></span>
-<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {side<span class="op">,</span> act<span class="op">,</span> m<span class="op">,</span> <span class="dt">se</span><span class="op">:</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">sqrt</span>(<span class="dv">1</span> <span class="op">/</span> d3<span class="op">.</span><span class="fu">sum</span>(w))}<span class="op">;</span></span>
+<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="82" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 81;"><span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>da <span class="op">=</span> <span class="fu">FileAttachment</span>(<span class="st">"data/dialogue_act_pooled.csv"</span>)<span class="op">.</span><span class="fu">csv</span>({<span class="dt">typed</span><span class="op">:</span> <span class="kw">true</span>})</span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>actOrder <span class="op">=</span> [<span class="st">"suggestion"</span><span class="op">,</span> <span class="st">"question"</span><span class="op">,</span> <span class="st">"inform"</span><span class="op">,</span> <span class="st">"functional"</span><span class="op">,</span> <span class="st">"disagreement"</span><span class="op">,</span> <span class="st">"agreement"</span><span class="op">,</span> <span class="st">"acknowledgment"</span>]</span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>actLabel <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>([[<span class="st">"suggestion"</span><span class="op">,</span> <span class="st">"Suggestion"</span>]<span class="op">,</span> [<span class="st">"question"</span><span class="op">,</span> <span class="st">"Question"</span>]<span class="op">,</span> [<span class="st">"inform"</span><span class="op">,</span> <span class="st">"Statement"</span>]<span class="op">,</span> [<span class="st">"functional"</span><span class="op">,</span> <span class="st">"Functional"</span>]<span class="op">,</span> [<span class="st">"disagreement"</span><span class="op">,</span> <span class="st">"Disagreement"</span>]<span class="op">,</span> [<span class="st">"agreement"</span><span class="op">,</span> <span class="st">"Agreement"</span>]<span class="op">,</span> [<span class="st">"acknowledgment"</span><span class="op">,</span> <span class="st">"Acknowledgment"</span>]])</span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>sideLabel <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>([[<span class="st">"perceiver"</span><span class="op">,</span> <span class="st">"vs what observers guessed"</span>]<span class="op">,</span> [<span class="st">"target"</span><span class="op">,</span> <span class="st">"vs what speakers were thinking"</span>]])</span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a><span class="co">// pool the two speakers (inverse-variance), then express each type as its distance from the average of the other six</span></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>daPooled <span class="op">=</span> d3<span class="op">.</span><span class="fu">groups</span>(da<span class="op">,</span> d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">side</span><span class="op">,</span> d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">dialogue_act</span>)<span class="op">.</span><span class="fu">flatMap</span>(([side<span class="op">,</span> acts]) <span class="kw">=&gt;</span> {</span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> rows <span class="op">=</span> acts<span class="op">.</span><span class="fu">map</span>(([act<span class="op">,</span> g]) <span class="kw">=&gt;</span> {</span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> w <span class="op">=</span> g<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> <span class="dv">1</span> <span class="op">/</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">pow</span>((d<span class="op">.</span><span class="at">upper</span> <span class="op">-</span> d<span class="op">.</span><span class="at">lower</span>) <span class="op">/</span> <span class="fl">3.92</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> m <span class="op">=</span> d3<span class="op">.</span><span class="fu">sum</span>(g<span class="op">.</span><span class="fu">map</span>((d<span class="op">,</span> i) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">mean</span> <span class="op">*</span> w[i])) <span class="op">/</span> d3<span class="op">.</span><span class="fu">sum</span>(w)<span class="op">;</span></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {side<span class="op">,</span> act<span class="op">,</span> m<span class="op">,</span> <span class="dt">se</span><span class="op">:</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">sqrt</span>(<span class="dv">1</span> <span class="op">/</span> d3<span class="op">.</span><span class="fu">sum</span>(w))}<span class="op">;</span></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> rows<span class="op">.</span><span class="fu">map</span>(r <span class="kw">=&gt;</span> {</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> others <span class="op">=</span> rows<span class="op">.</span><span class="fu">filter</span>(o <span class="kw">=&gt;</span> o<span class="op">.</span><span class="at">act</span> <span class="op">!==</span> r<span class="op">.</span><span class="at">act</span>)<span class="op">;</span></span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> base <span class="op">=</span> d3<span class="op">.</span><span class="fu">mean</span>(others<span class="op">,</span> o <span class="kw">=&gt;</span> o<span class="op">.</span><span class="at">m</span>)<span class="op">;</span></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="dt">side</span><span class="op">:</span> sideLabel<span class="op">.</span><span class="fu">get</span>(side)<span class="op">,</span> <span class="dt">act</span><span class="op">:</span> actLabel<span class="op">.</span><span class="fu">get</span>(r<span class="op">.</span><span class="at">act</span>)<span class="op">,</span> <span class="dt">dev</span><span class="op">:</span> r<span class="op">.</span><span class="at">m</span> <span class="op">-</span> base<span class="op">,</span> <span class="dt">lo</span><span class="op">:</span> r<span class="op">.</span><span class="at">m</span> <span class="op">-</span> base <span class="op">-</span> <span class="fl">1.96</span> <span class="op">*</span> r<span class="op">.</span><span class="at">se</span><span class="op">,</span> <span class="dt">hi</span><span class="op">:</span> r<span class="op">.</span><span class="at">m</span> <span class="op">-</span> base <span class="op">+</span> <span class="fl">1.96</span> <span class="op">*</span> r<span class="op">.</span><span class="at">se</span><span class="op">,</span> <span class="dt">m</span><span class="op">:</span> r<span class="op">.</span><span class="at">m</span><span class="op">,</span> base}<span class="op">;</span></span>
 <span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
-<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> rows<span class="op">.</span><span class="fu">map</span>(r <span class="kw">=&gt;</span> {</span>
-<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> others <span class="op">=</span> rows<span class="op">.</span><span class="fu">filter</span>(o <span class="kw">=&gt;</span> o<span class="op">.</span><span class="at">act</span> <span class="op">!==</span> r<span class="op">.</span><span class="at">act</span>)<span class="op">;</span></span>
-<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> base <span class="op">=</span> d3<span class="op">.</span><span class="fu">mean</span>(others<span class="op">,</span> o <span class="kw">=&gt;</span> o<span class="op">.</span><span class="at">m</span>)<span class="op">;</span></span>
-<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="dt">side</span><span class="op">:</span> sideLabel<span class="op">.</span><span class="fu">get</span>(side)<span class="op">,</span> <span class="dt">act</span><span class="op">:</span> actLabel<span class="op">.</span><span class="fu">get</span>(r<span class="op">.</span><span class="at">act</span>)<span class="op">,</span> <span class="dt">dev</span><span class="op">:</span> r<span class="op">.</span><span class="at">m</span> <span class="op">-</span> base<span class="op">,</span> <span class="dt">lo</span><span class="op">:</span> r<span class="op">.</span><span class="at">m</span> <span class="op">-</span> base <span class="op">-</span> <span class="fl">1.96</span> <span class="op">*</span> r<span class="op">.</span><span class="at">se</span><span class="op">,</span> <span class="dt">hi</span><span class="op">:</span> r<span class="op">.</span><span class="at">m</span> <span class="op">-</span> base <span class="op">+</span> <span class="fl">1.96</span> <span class="op">*</span> r<span class="op">.</span><span class="at">se</span><span class="op">,</span> <span class="dt">m</span><span class="op">:</span> r<span class="op">.</span><span class="at">m</span><span class="op">,</span> base}<span class="op">;</span></span>
-<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
-<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>  <span class="dt">width</span><span class="op">:</span> <span class="dv">720</span><span class="op">,</span> <span class="dt">height</span><span class="op">:</span> <span class="dv">300</span><span class="op">,</span> <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">105</span><span class="op">,</span> <span class="dt">marginRight</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span></span>
-<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {<span class="dt">label</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span> <span class="dt">domain</span><span class="op">:</span> actOrder<span class="op">.</span><span class="fu">map</span>(a <span class="kw">=&gt;</span> actLabel<span class="op">.</span><span class="fu">get</span>(a))}<span class="op">,</span></span>
-<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {<span class="dt">label</span><span class="op">:</span> <span class="st">"Similarity, relative to the average of the other six utterance types →"</span><span class="op">,</span> <span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="fl">0.06</span><span class="op">,</span> <span class="fl">0.08</span>]<span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">tickFormat</span><span class="op">:</span> d <span class="kw">=&gt;</span> (d <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">?</span> <span class="st">"+"</span> <span class="op">:</span> <span class="st">""</span>) <span class="op">+</span> d<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>)}<span class="op">,</span></span>
-<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="st">"vs what observers guessed"</span><span class="op">,</span> <span class="st">"vs what speakers were thinking"</span>]<span class="op">,</span> <span class="dt">range</span><span class="op">:</span> [<span class="st">"#8a8f98"</span><span class="op">,</span> <span class="st">"#123F36"</span>]<span class="op">,</span> <span class="dt">legend</span><span class="op">:</span> <span class="kw">true</span>}<span class="op">,</span></span>
-<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">ruleX</span>([<span class="dv">0</span>]<span class="op">,</span> {<span class="dt">stroke</span><span class="op">:</span> <span class="st">"#374151"</span>})<span class="op">,</span></span>
-<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span>[<span class="st">"vs what observers guessed"</span><span class="op">,</span> <span class="st">"vs what speakers were thinking"</span>]<span class="op">.</span><span class="fu">map</span>((sd<span class="op">,</span> k) <span class="kw">=&gt;</span> Plot<span class="op">.</span><span class="fu">ruleY</span>(daPooled<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">side</span> <span class="op">===</span> sd)<span class="op">,</span> {<span class="dt">y</span><span class="op">:</span> <span class="st">"act"</span><span class="op">,</span> <span class="dt">x1</span><span class="op">:</span> <span class="st">"lo"</span><span class="op">,</span> <span class="dt">x2</span><span class="op">:</span> <span class="st">"hi"</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">"side"</span><span class="op">,</span> <span class="dt">strokeWidth</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">dy</span><span class="op">:</span> k <span class="op">===</span> <span class="dv">0</span> <span class="op">?</span> <span class="op">-</span><span class="dv">5</span> <span class="op">:</span> <span class="dv">5</span>}))<span class="op">,</span></span>
-<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span>[<span class="st">"vs what observers guessed"</span><span class="op">,</span> <span class="st">"vs what speakers were thinking"</span>]<span class="op">.</span><span class="fu">map</span>((sd<span class="op">,</span> k) <span class="kw">=&gt;</span> Plot<span class="op">.</span><span class="fu">dot</span>(daPooled<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">side</span> <span class="op">===</span> sd)<span class="op">,</span> {<span class="dt">y</span><span class="op">:</span> <span class="st">"act"</span><span class="op">,</span> <span class="dt">x</span><span class="op">:</span> <span class="st">"dev"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"side"</span><span class="op">,</span> <span class="dt">r</span><span class="op">:</span> <span class="fl">4.5</span><span class="op">,</span> <span class="dt">dy</span><span class="op">:</span> k <span class="op">===</span> <span class="dv">0</span> <span class="op">?</span> <span class="op">-</span><span class="dv">5</span> <span class="op">:</span> <span class="dv">5</span><span class="op">,</span> <span class="dt">tip</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">title</span><span class="op">:</span> d <span class="kw">=&gt;</span> <span class="vs">`</span><span class="sc">${</span>d<span class="op">.</span><span class="at">act</span><span class="sc">}</span><span class="vs">, </span><span class="sc">${</span>d<span class="op">.</span><span class="at">side</span><span class="sc">}\n${</span>d<span class="op">.</span><span class="at">dev</span> <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">?</span> <span class="st">"+"</span> <span class="op">:</span> <span class="st">""</span><span class="sc">}${</span>d<span class="op">.</span><span class="at">dev</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="vs"> relative to the other types (95% interval </span><span class="sc">${</span>d<span class="op">.</span><span class="at">lo</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="vs"> to </span><span class="sc">${</span>d<span class="op">.</span><span class="at">hi</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="vs">)</span><span class="sc">\n</span><span class="vs">pooled mean </span><span class="sc">${</span>d<span class="op">.</span><span class="at">m</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="vs">, other types average </span><span class="sc">${</span>d<span class="op">.</span><span class="at">base</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="vs">`</span>}))</span>
-<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a>  ]</span>
-<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>  <span class="dt">width</span><span class="op">:</span> <span class="dv">720</span><span class="op">,</span> <span class="dt">height</span><span class="op">:</span> <span class="dv">300</span><span class="op">,</span> <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">105</span><span class="op">,</span> <span class="dt">marginRight</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span></span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {<span class="dt">label</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span> <span class="dt">domain</span><span class="op">:</span> actOrder<span class="op">.</span><span class="fu">map</span>(a <span class="kw">=&gt;</span> actLabel<span class="op">.</span><span class="fu">get</span>(a))}<span class="op">,</span></span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {<span class="dt">label</span><span class="op">:</span> <span class="st">"Similarity, relative to the average of the other six utterance types →"</span><span class="op">,</span> <span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="fl">0.06</span><span class="op">,</span> <span class="fl">0.08</span>]<span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">tickFormat</span><span class="op">:</span> d <span class="kw">=&gt;</span> (d <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">?</span> <span class="st">"+"</span> <span class="op">:</span> <span class="st">""</span>) <span class="op">+</span> d<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>)}<span class="op">,</span></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [<span class="st">"vs what observers guessed"</span><span class="op">,</span> <span class="st">"vs what speakers were thinking"</span>]<span class="op">,</span> <span class="dt">range</span><span class="op">:</span> [<span class="st">"#8a8f98"</span><span class="op">,</span> <span class="st">"#123F36"</span>]<span class="op">,</span> <span class="dt">legend</span><span class="op">:</span> <span class="kw">true</span>}<span class="op">,</span></span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">ruleX</span>([<span class="dv">0</span>]<span class="op">,</span> {<span class="dt">stroke</span><span class="op">:</span> <span class="st">"#374151"</span>})<span class="op">,</span></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span>[<span class="st">"vs what observers guessed"</span><span class="op">,</span> <span class="st">"vs what speakers were thinking"</span>]<span class="op">.</span><span class="fu">map</span>((sd<span class="op">,</span> k) <span class="kw">=&gt;</span> Plot<span class="op">.</span><span class="fu">ruleY</span>(daPooled<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">side</span> <span class="op">===</span> sd)<span class="op">,</span> {<span class="dt">y</span><span class="op">:</span> <span class="st">"act"</span><span class="op">,</span> <span class="dt">x1</span><span class="op">:</span> <span class="st">"lo"</span><span class="op">,</span> <span class="dt">x2</span><span class="op">:</span> <span class="st">"hi"</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">"side"</span><span class="op">,</span> <span class="dt">strokeWidth</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">dy</span><span class="op">:</span> k <span class="op">===</span> <span class="dv">0</span> <span class="op">?</span> <span class="op">-</span><span class="dv">5</span> <span class="op">:</span> <span class="dv">5</span>}))<span class="op">,</span></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span>[<span class="st">"vs what observers guessed"</span><span class="op">,</span> <span class="st">"vs what speakers were thinking"</span>]<span class="op">.</span><span class="fu">map</span>((sd<span class="op">,</span> k) <span class="kw">=&gt;</span> Plot<span class="op">.</span><span class="fu">dot</span>(daPooled<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">side</span> <span class="op">===</span> sd)<span class="op">,</span> {<span class="dt">y</span><span class="op">:</span> <span class="st">"act"</span><span class="op">,</span> <span class="dt">x</span><span class="op">:</span> <span class="st">"dev"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"side"</span><span class="op">,</span> <span class="dt">r</span><span class="op">:</span> <span class="fl">4.5</span><span class="op">,</span> <span class="dt">dy</span><span class="op">:</span> k <span class="op">===</span> <span class="dv">0</span> <span class="op">?</span> <span class="op">-</span><span class="dv">5</span> <span class="op">:</span> <span class="dv">5</span><span class="op">,</span> <span class="dt">tip</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">title</span><span class="op">:</span> d <span class="kw">=&gt;</span> <span class="vs">`</span><span class="sc">${</span>d<span class="op">.</span><span class="at">act</span><span class="sc">}</span><span class="vs">, </span><span class="sc">${</span>d<span class="op">.</span><span class="at">side</span><span class="sc">}\n${</span>d<span class="op">.</span><span class="at">dev</span> <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">?</span> <span class="st">"+"</span> <span class="op">:</span> <span class="st">""</span><span class="sc">}${</span>d<span class="op">.</span><span class="at">dev</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="vs"> relative to the other types (95% interval </span><span class="sc">${</span>d<span class="op">.</span><span class="at">lo</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="vs"> to </span><span class="sc">${</span>d<span class="op">.</span><span class="at">hi</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="vs">)</span><span class="sc">\n</span><span class="vs">pooled mean </span><span class="sc">${</span>d<span class="op">.</span><span class="at">m</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="vs">, other types average </span><span class="sc">${</span>d<span class="op">.</span><span class="at">base</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="vs">`</span>}))</span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-3-1" data-nodetype="declaration">
@@ -640,20 +612,27 @@ Note
 </div>
 </div>
 <div class="figure-caption">
-<p>How much each utterance type stands out from the rest, on each side of the comparison. Zero is the average of the other six types; a point to the right means that type matched more closely than the others did. Both speakers are pooled, since who spoke made no difference. Suggestions are the only type whose interval clears zero on the speakers’ side (green). On the observers’ side (grey) the point is in the same place but the interval reaches back to zero, and it rests on only 801 suggestion utterances across four studies, so the evidence there is thin. Intervals reflect each type’s own uncertainty.</p>
+<p>How much each type of utterance stands out. Zero is the average of the other six types; points to the right matched more closely. Suggestions are the only type that clearly stands out for what speakers were thinking (green). For observers’ guesses (grey), the estimate is similar but less certain.</p>
 </div>
-<p><strong>The most recent words carry the signal.</strong> Similarity rises toward the end of the segment whether the comparison is with the observer’s guess or with the speaker’s own report. That second part is what makes the first part useful. If observers simply echoed the last thing said, the trend would show up on their side only. It shows up on both, so the end of a segment holds the information and observers are reading it.</p>
-<p><strong>Who said it does not matter.</strong> The speaker’s own words were no closer to the guess, or to the thought, than the partner’s words. This held in every live-conversation study and at every point in the segment. A null on both sides is worth having. It means a model of what someone is thinking should read the whole exchange, the partner’s turns included.</p>
+<div class="plain-box callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+In human words: what the lines on each dot mean
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Each line shows the range of values that fit the data. When the whole range sits to the right of zero, as it does for suggestions compared with speakers’ thoughts, we can be confident suggestions really stand out. On the observers’ side the range stretches back to zero. Observers may have picked up on suggestions, or they may not have; suggestions were rare enough in these recordings that the data cannot tell.</p>
+</div>
+</div>
+<p><strong>The most recent words carried the most information.</strong> Similarity climbed toward each pause for both the guesses and the real thoughts (first figure). Because the climb shows up in the real thoughts too, observers who leaned on the last thing said were drawing on real information.</p>
+<p><strong>Who spoke made no difference.</strong> The partner’s words matched the speaker’s thoughts just as closely as the speaker’s own words did. To understand what someone is thinking, read the whole exchange.</p>
 </section>
 <section id="what-this-is-good-for" class="level2">
 <h2 class="anchored" data-anchor-id="what-this-is-good-for">What this is good for</h2>
-<p>The pipeline is the product. It takes recorded conversation from any source, produces a validated utterance-level dataset with type labels, and fits a time-varying model with the uncertainty attached. The same code would run on user-interview recordings, support calls, or sales calls with the transcripts swapped in.</p>
-<p>For user research, the suggestions result is the practical one. Analysis of an interview tends to center on how people answer the questions they were asked, yet the moments when someone volunteers a proposal (“it would be easier if…”) may say more about what they are thinking.</p>
-<p>Two lessons carry over. Publish the holdout number next to every automated label; a 93% label and a 70% label should not enter a model the same way. And plan cluster sizes before collecting. These hierarchical models needed roughly 40 speakers per study to converge, ten times what this field usually records, and the study with 9 speakers had to be dropped from half the analyses. Sessions within users and calls within agents have the same constraint.</p>
-</section>
-<section id="limits" class="level2">
-<h2 class="anchored" data-anchor-id="limits">Limits</h2>
-<p>Similarity is not attention. The data show that guesses resemble recent speech; whether observers are consciously using it is an inference. The two interview-style studies had too few speakers to model on the speaker side, so the design differences visible in the first figure are mapped on the observer side only. The utterance types are broad; a finer scheme might sharpen or dissolve the suggestion result. If I ran this again I would fix the number of speakers per study before anything else, because that decided which questions could be asked at all.</p>
+<p>The same pipeline would run on user interviews, support calls, or sales calls. For user research, the suggestions result is the practical one. Analysis usually focuses on how people answer the questions we ask them, yet the moments when someone volunteers a proposal (“it would be easier if…”) may say more about what they are thinking.</p>
 </section>
 <section id="links" class="level2">
 <h2 class="anchored" data-anchor-id="links">Links</h2>
