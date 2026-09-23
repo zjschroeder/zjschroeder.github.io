@@ -1,0 +1,7 @@
+predictor,study,role,estimate,lower,upper,range_lower,range_upper
+Gender (men vs. women),Study 1,exploratory,0.40,0.22,0.59,0.30,0.50
+Gender (men vs. women),Study 2,preregistered replication,0.44,0.17,0.70,0.30,0.50
+Gender (men vs. women),Study 3,preregistered extension,0.42,0.24,0.60,0.30,0.50
+Social belonging,Study 1,exploratory,0.20,0.05,0.35,0.12,0.28
+Social belonging,Study 2,preregistered replication,0.25,0.05,0.45,0.12,0.28
+Social belonging,Study 3,preregistered extension,0.08,-0.02,0.19,0.12,0.28
