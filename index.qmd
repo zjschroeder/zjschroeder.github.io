@@ -24,9 +24,17 @@ listing:
 :::
 
 ::: {.g-col-12 .g-col-md-8}
-**How can we use language as a tool to understand empathy and interpersonal perception online and in person?**
+**How does what we say reflect how we understand each other and ourselves?**
 
-I'm a behavioral scientist and statistician with seven years of experience researching this question. Of my many research projects, some of my favorites include: building an analytic pipeline that transcribed and analyzed 20 years of video-recorded conversations to identify the best cues for understanding what someone is thinking; examining partisanship and outrage in \~8.6 million tweets discussing "cancel culture," including how outrage builds and fades in the weeks after a cancellation; and a three survey experiments on how students' gender and sense of belonging shape the way they read ambiguous feedback.
+I'm a behavioral scientist and data scientist who has spent seven years studying this question. My work brings together a wide array of tools from natural language processing to Bayesian statistics to experimental and survey design. Across all of my projects, I'm guided by three principles:
+
+1\) **Quality measurement.** Are we actually measuring the thing that we think we're measuring?
+
+\
+2) **Replicability.** Do our findings tell us about the wider world or do they only tell us about the specific people we surveyed?
+
+\
+3) **Accessible scientific communication.** Can non-scientists understand what we found, how we found it, and why it matters?
 
 If I'm not wrangling data at my desk, I'm deep in the woods with my dog.
 :::
