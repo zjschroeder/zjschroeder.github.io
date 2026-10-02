@@ -26,12 +26,12 @@ listing:
 ::: {.g-col-12 .g-col-md-8}
 **How does what we say reflect how we understand each other and ourselves?**
 
-I'm a behavioral scientist and data scientist who has spent seven years studying this question. My work brings together a wide array of tools from natural language processing to Bayesian statistics to experimental and survey design. Across all of my projects, I'm guided by three principles:
+I'm an empathy researcher and data scientist who has spent seven years studying this question. My work brings together a wide array of tools from natural language processing to Bayesian statistics to experimental and survey design. Across all of my projects, I'm guided by three principles:
 
-1\) **Quality measurement.** Are we actually measuring the thing that we think we're measuring?
+1\) **Quality measurement.** Are we measuring what we think we're measuring?
 
 \
-2) **Replicability.** Do our findings tell us about the wider world or do they only tell us about the specific people we surveyed?
+2) **Generalizable findings.** Do our findings tell us about the wider world or do they only tell us about the specific people we surveyed?
 
 \
 3) **Accessible scientific communication.** Can non-scientists understand what we found, how we found it, and why it matters?
