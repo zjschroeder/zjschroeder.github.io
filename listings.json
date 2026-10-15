@@ -1,6 +1,6 @@
 [
   {
-    "listing": "/projects/index.html",
+    "listing": "/index.html",
     "items": [
       "/projects/cancel-culture/index.html",
       "/projects/conversation-measures/index.html",
@@ -12,8 +12,9 @@
     "items": []
   },
   {
-    "listing": "/index.html",
+    "listing": "/projects/index.html",
     "items": [
+      "/projects/mn-schools/index.html",
       "/projects/cancel-culture/index.html",
       "/projects/conversation-measures/index.html",
       "/projects/belonging-feedback/index.html"

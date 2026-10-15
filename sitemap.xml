@@ -1,39 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://zjschroeder.com/projects/index.html</loc>
-    <lastmod>2026-10-02T00:35:19.521Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zjschroeder.com/projects/belonging-feedback/index.html</loc>
-    <lastmod>2026-10-02T00:35:19.507Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zjschroeder.com/about.html</loc>
-    <lastmod>2026-10-02T00:35:19.474Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zjschroeder.com/dashboards/index.html</loc>
-    <lastmod>2026-10-02T00:35:19.507Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zjschroeder.com/blog/index.html</loc>
-    <lastmod>2026-10-02T00:35:19.507Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zjschroeder.com/index.html</loc>
-    <lastmod>2026-10-02T00:35:19.507Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zjschroeder.com/publications.html</loc>
-    <lastmod>2026-10-02T00:35:19.521Z</lastmod>
-  </url>
-  <url>
-    <loc>https://zjschroeder.com/projects/conversation-measures/index.html</loc>
-    <lastmod>2026-10-02T00:35:19.521Z</lastmod>
+    <loc>https://zjschroeder.com/projects/mn-schools/index.html</loc>
+    <lastmod>2026-10-15T20:09:29.163Z</lastmod>
   </url>
   <url>
     <loc>https://zjschroeder.com/projects/cancel-culture/index.html</loc>
-    <lastmod>2026-10-02T00:35:19.519Z</lastmod>
+    <lastmod>2026-10-15T20:09:29.162Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zjschroeder.com/projects/conversation-measures/index.html</loc>
+    <lastmod>2026-10-15T20:09:29.163Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zjschroeder.com/publications.html</loc>
+    <lastmod>2026-10-15T20:09:29.163Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zjschroeder.com/index.html</loc>
+    <lastmod>2026-10-15T20:09:29.147Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zjschroeder.com/blog/index.html</loc>
+    <lastmod>2026-10-15T20:09:29.147Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zjschroeder.com/dashboards/index.html</loc>
+    <lastmod>2026-10-15T20:09:29.147Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zjschroeder.com/about.html</loc>
+    <lastmod>2026-10-15T20:09:29.111Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zjschroeder.com/projects/belonging-feedback/index.html</loc>
+    <lastmod>2026-10-15T20:09:29.147Z</lastmod>
+  </url>
+  <url>
+    <loc>https://zjschroeder.com/projects/index.html</loc>
+    <lastmod>2026-10-15T20:09:29.163Z</lastmod>
   </url>
 </urlset>
