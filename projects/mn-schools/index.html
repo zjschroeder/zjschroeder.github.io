@@ -365,18 +365,35 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="attendance-and-graduation">Attendance and graduation</h2>
 <p>Click a district on the map to see its consistent attendance and four-year graduation rates over time. With nothing selected, the chart shows the enrollment-weighted average across all regular districts.</p>
 <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
-<div style="overflow-x: auto;">
+<style>
+  .tab-fit { width: 100%; overflow: hidden; }
+  .tab-fit .tab-inner { width: 1200px; transform-origin: top left; }
+</style>
+<script>
+  // Shrink the fixed-size (1200 x 927) dashboards to fit narrower windows
+  function fitTableau() {
+    document.querySelectorAll('.tab-fit').forEach(function (box) {
+      var s = Math.min(1, box.clientWidth / 1200);
+      box.firstElementChild.style.transform = 'scale(' + s + ')';
+      box.style.height = (927 * s) + 'px';
+    });
+  }
+  window.addEventListener('load', fitTableau);
+  window.addEventListener('resize', fitTableau);
+  document.addEventListener('DOMContentLoaded', fitTableau);
+</script>
+<div class="tab-fit"><div class="tab-inner">
 <tableau-viz src="https://public.tableau.com/views/ed_attendance_portfolio/AttendanceGraduation" toolbar="bottom" hide-tabs="true" width="1200" height="927">
 </tableau-viz>
-</div>
+</div></div>
 </section>
 <section id="changing-student-population" class="level2">
 <h2 class="anchored" data-anchor-id="changing-student-population">Changing student population</h2>
 <p>Pick a student group, a measure (number of students, share of enrollment, or percent growth), and a time frame to see how each district’s enrollment has shifted. Switch to <strong>Year by year</strong> to step through one year at a time.</p>
-<div style="overflow-x: auto;">
+<div class="tab-fit"><div class="tab-inner">
 <tableau-viz src="https://public.tableau.com/views/ed_attendance_portfolio/ChangingStudentPopulation" toolbar="bottom" hide-tabs="true" width="1200" height="927">
 </tableau-viz>
-</div>
+</div></div>
 <p><a href="https://public.tableau.com/views/ed_attendance_portfolio/AttendanceGraduation" class="btn btn-outline-secondary">View on Tableau Public</a> <a href="https://github.com/zjschroeder/mn-attendance-dashboard" class="btn btn-outline-secondary">Data and code on GitHub</a></p>
 </section>
 <section id="the-data" class="level2">
