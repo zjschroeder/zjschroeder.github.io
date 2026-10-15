@@ -24,6 +24,17 @@ A ground-up visual explanation of common statistical procedures that uses intera
 
 ::::::::
 
+## Education Data
+
+:::::::: grid
+::: {.g-col-12 .g-col-md-6}
+### [Minnesota School Districts](../projects/mn-schools/index.qmd)
+
+Two Tableau dashboards built on a SQL pipeline covering 13 years of Minnesota graduation, attendance, and enrollment data for 329 districts. Click a district to compare it with the state, or step through how its student population has changed. [Source](https://github.com/zjschroeder/mn-attendance-dashboard)
+:::
+
+::::::::
+
 ## Fun with Data
 
 :::::::: grid
